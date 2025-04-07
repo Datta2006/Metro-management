@@ -1,0 +1,30 @@
+.search-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  
+  .search-form .form-group {
+    margin-bottom: 0;
+  }
+  
+  .search-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .search-form input,
+  .search-form select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+  }
+  
+  .search-form button {
+    align-self: flex-end;
+    height: fit-content;
+  }
