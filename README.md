@@ -193,11 +193,11 @@ const connection = mysql.createConnection({
   <img src="assets/1.png" alt="Screenshot 1" width="300"/>
   <img src="assets/2.png" alt="Screenshot 2" width="300"/>
 </p>
-<img src="3.png" />
-<img src="4.png" />
-<img src="5.png" />
-<img src="6.png" />
-<img src="7.png" />
+<img src="assets/3.png" />
+<img src="assets/4.png" />
+<img src="assets/5.png" />
+<img src="assets/6.png" />
+<img src="assets/7.png" />
 
 
 ---
