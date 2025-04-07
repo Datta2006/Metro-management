@@ -189,7 +189,11 @@ const connection = mysql.createConnection({
 
 ## 📸 Screenshots / Demo
 
-(Coming soon – add screenshots or deployment link)
+<p align="center">
+  <img src="assets/1.png" alt="Screenshot 1" width="300"/>
+  <img src="assets/2.png" alt="Screenshot 2" width="300"/>
+</p>
+
 
 ---
 
