@@ -30,6 +30,7 @@ cd Metro-management
 ### 2. 📦 Install Backend Dependencies
 
 ```bash
+cd back
 npm install
 ```
 
