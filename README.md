@@ -38,7 +38,7 @@ npm install
 ### 3. 🚀 Start Backend Server
 
 ```bash
-cd ..
+cd back
 node server.js
 ```
 
