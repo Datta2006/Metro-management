@@ -1,8 +1,46 @@
-# 🚆 Metro Management System
+# 🚇 Metro Management System
 
-This is a full-stack Metro/Railway management web application that allows users to book tickets, make payments, view schedules, provide feedback, and more.
+A full-stack metro ticket booking web application built with **React.js**, **Node.js**, **Express.js**, and **MySQL**. This system allows users to register, login, and book train tickets. Admins have access to manage trains, stations, and users.
 
 ---
+
+## 🌐 Tech Stack
+
+### 🔧 Frontend
+- **React.js** — Modern JavaScript library for building user interfaces
+- **Axios** — For making HTTP requests to the backend
+- **React Router** — For navigation and routing
+
+### 🛠 Backend
+- **Node.js** — JavaScript runtime environment
+- **Express.js** — Fast and minimalist web framework for Node.js
+- **MySQL** — Relational database management system
+- **Sequelize** *(optional)* — ORM for MySQL (if used)
+
+### 🔒 Authentication & Security
+- **Bcrypt.js** — For hashing passwords
+- **JWT (JSON Web Tokens)** — For user authentication
+
+---
+
+## 👤 User Features
+
+- ✅ User registration and login
+- 🎫 Book metro/train tickets
+- 🔎 View train schedules and stations
+- 🧾 View and manage personal bookings
+
+---
+
+## 🛠 Admin Features
+
+- ➕ Add new trains and stations
+- 🗂 Manage and update train information
+- 👤 View all registered users
+- ❌ Delete or modify train/station entries
+
+---
+
 
 ## 📁 Project Structure
 
