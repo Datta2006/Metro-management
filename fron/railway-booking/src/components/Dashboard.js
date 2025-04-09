@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import TrainCardList from './TrainCard';
 import BookingCard from './BookingCard';
 import SearchForm from './SearchForm';
-import Feedback from './Feedback';
+import Feedback from './Feedback1';
 import './Dashboard.css';
 import TrainSlider from './TrainSlider';
 
@@ -196,12 +196,38 @@ const Dashboard = ({ setAuthentication, user }) => {
               ))}
             </div>
           )}
+
+
+<section className="feedback-section">
+  <h2>We'd love your feedback</h2>
+  <Feedback />
+</section>
         </section>
-        <Feedback trainId={1}></Feedback>
+        {/* <section className="feedback-section">
+          <h2>
+            {selectedTrainForFeedback 
+              ? `Leave Feedback for ${selectedTrainForFeedback.name}`
+              : "Leave Feedback"}
+          </h2>
+          {selectedTrainForFeedback ? (
+            <Feedback 
+              trainId={selectedTrainForFeedback.id}
+              onSuccess={() => {
+                setSelectedTrainForFeedback(null);
+                // Optional: show success message
+              }}
+            />
+          ) : (
+            <div className="feedback-prompt">
+              <p>Please select a train from the list above to leave feedback</p>
+            </div>
+          )}
+        </section> */}
+        
       </main>
 
       {/* Feedback Modal */}
-      {selectedTrainForFeedback && (
+      {/* {selectedTrainForFeedback && (
         <div className="feedback-modal">
           <div className="feedback-modal-content">
             <button 
@@ -217,7 +243,7 @@ const Dashboard = ({ setAuthentication, user }) => {
           </div>
           
         </div>
-      )}
+      )} */}
       
     </motion.div>
   );

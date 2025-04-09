@@ -6,6 +6,7 @@ const AdminUsers = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetchUsers();
@@ -70,6 +71,11 @@ const AdminUsers = () => {
     }
   };
 
+  const filteredUsers = users.filter(user => 
+    user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.email.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -77,16 +83,38 @@ const AdminUsers = () => {
       transition={{ duration: 0.5 }}
       className="admin-users"
     >
-      <h2>Manage Users</h2>
+      <div className="admin-header">
+        <h2>User Management</h2>
+        <div className="search-box">
+          <input
+            type="text"
+            placeholder="Search users..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <i className="fas fa-search"></i>
+        </div>
+      </div>
       
-      {error && <div className="error-message">{error}</div>}
+      {error && (
+        <motion.div 
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="error-message"
+        >
+          {error}
+        </motion.div>
+      )}
 
       <div className="admin-content">
         {loading ? (
-          <div className="spinner"></div>
+          <div className="loading-spinner">
+            <div className="spinner"></div>
+            <p>Loading users...</p>
+          </div>
         ) : (
-          <div className="user-table">
-            <table>
+          <div className="user-table-container">
+            <table className="user-table">
               <thead>
                 <tr>
                   <th>Username</th>
@@ -96,33 +124,48 @@ const AdminUsers = () => {
                 </tr>
               </thead>
               <tbody>
-                {users.map(user => (
-                  <tr key={user.id}>
-                    <td>{user.username}</td>
-                    <td>{user.email}</td>
-                    <td>
-                      <select
-                        value={user.role}
-                        onChange={(e) => updateUserRole(user.id, e.target.value)}
-                        className="role-select"
-                      >
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                      </select>
-                    </td>
-                    <td className="actions">
-                      <button 
-                        className="btn btn-sm btn-danger"
-                        onClick={() => deleteUser(user.id)}
-                        disabled={user.role === 'admin'}
-                      >
-                        Delete
-                      </button>
-                    </td>
+                {filteredUsers.length > 0 ? (
+                  filteredUsers.map(user => (
+                    <motion.tr 
+                      key={user.id}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <td>{user.username}</td>
+                      <td>{user.email}</td>
+                      <td>
+                        <select
+                          value={user.role}
+                          onChange={(e) => updateUserRole(user.id, e.target.value)}
+                          className="role-select"
+                        >
+                          <option value="user">User</option>
+                          <option value="admin">Admin</option>
+                          <option value="moderator">Moderator</option>
+                        </select>
+                      </td>
+                      <td className="actions">
+                        <button 
+                          className="btn btn-delete"
+                          onClick={() => deleteUser(user.id)}
+                          disabled={user.role === 'admin'}
+                        >
+                          <i className="fas fa-trash-alt"></i> Delete
+                        </button>
+                      </td>
+                    </motion.tr>
+                  ))
+                ) : (
+                  <tr className="no-results">
+                    <td colSpan="4">No users found</td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
+            <div className="table-footer">
+              <span>Showing {filteredUsers.length} of {users.length} users</span>
+            </div>
           </div>
         )}
       </div>

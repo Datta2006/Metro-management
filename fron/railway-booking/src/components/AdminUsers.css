@@ -1,4 +1,207 @@
-.user-table {
-    max-height: 600px;
-    overflow-y: auto;
+/* AdminUsers.css */
+
+.admin-users {
+  padding: 2rem;
+  background-color: #121212;
+  color: #e0e0e0;
+  min-height: 100vh;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.admin-header h2 {
+  color: #ffffff;
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-box input {
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  border-radius: 20px;
+  border: 1px solid #333;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  width: 250px;
+  transition: all 0.3s;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #555;
+  box-shadow: 0 0 0 2px rgba(100, 100, 100, 0.2);
+}
+
+.search-box i {
+  position: absolute;
+  left: 1rem;
+  color: #777;
+}
+
+.error-message {
+  background-color: #d32f2f;
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.error-message i {
+  font-size: 1.2rem;
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-left-color: #7986cb;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
+}
+
+.user-table-container {
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.user-table thead {
+  background-color: #0d47a1;
+}
+
+.user-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 500;
+  color: white;
+}
+
+.user-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #333;
+}
+
+.user-table tr:last-child td {
+  border-bottom: none;
+}
+
+.user-table tr:hover {
+  background-color: #252525;
+}
+
+.role-select {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background-color: #2d2d2d;
+  color: #e0e0e0;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.role-select:focus {
+  outline: none;
+  border-color: #7986cb;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn-delete {
+  background-color: #d32f2f;
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: #b71c1c;
+}
+
+.btn-delete:disabled {
+  background-color: #333;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.no-results td {
+  text-align: center;
+  padding: 2rem;
+  color: #777;
+}
+
+.table-footer {
+  padding: 1rem;
+  background-color: #252525;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .admin-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .search-box {
+    width: 100%;
+  }
+  
+  .search-box input {
+    width: 100%;
+  }
+  
+  .user-table {
+    display: block;
+    overflow-x: auto;
+  }
+}

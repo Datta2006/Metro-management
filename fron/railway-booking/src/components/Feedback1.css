@@ -1,0 +1,18 @@
+.simple-feedback {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #eee;
+  }
+  
+  .simple-feedback textarea {
+    margin-bottom: 10px;
+    padding: 8px;
+  }
+  
+  .simple-feedback button {
+    padding: 8px 15px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }

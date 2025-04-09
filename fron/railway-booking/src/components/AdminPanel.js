@@ -6,14 +6,14 @@ import AdminStations from './AdminStations';
 import AdminUsers from './AdminUsers';
 import './AdminPanel.css';
 
-const AdminPanel = ({ setIsAuthenticated, user }) => {
+const AdminPanel = ({ setAuthentication, user }) => {
   const [activeTab, setActiveTab] = useState('trains');
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    setIsAuthenticated(false);
+    setAuthentication(false);
     navigate('/login');
   };
 

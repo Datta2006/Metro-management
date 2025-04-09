@@ -1,4 +1,182 @@
+/* AdminTrains.css - Clean Responsive Dark Theme */
+
+/* Base Styles */
+.admin-trains {
+  padding: 1rem;
+  background-color: #121212;
+  color: #e0e0e0;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+}
+
+/* Header */
+.admin-header {
+  margin-bottom: 1.5rem;
+}
+
+.admin-header h2 {
+  color: #bb86fc;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.search-box {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #2d2d2d;
+  border: 1px solid #333;
+  border-radius: 4px;
+  color: #e0e0e0;
+}
+
+/* Main Content Layout */
+.admin-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Forms */
+.card {
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #a0a0a0;
+}
+
+.dark-input {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #2d2d2d;
+  border: 1px solid #333;
+  border-radius: 4px;
+  color: #e0e0e0;
+  margin-bottom: 0.5rem;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.btn-primary {
+  background-color: #bb86fc;
+  color: #000;
+}
+
+.btn-secondary {
+  background-color: #2d2d2d;
+  color: #e0e0e0;
+}
+
+/* Tables */
+.train-table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .train-table {
-    max-height: 600px;
-    overflow-y: auto;
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Minimum width before scrolling */
+}
+
+.train-table th {
+  background-color: #252525;
+  padding: 1rem;
+  text-align: left;
+}
+
+.train-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #333;
+}
+
+.train-table tr:nth-child(even) {
+  background-color: #252525;
+}
+
+/* Responsive Actions */
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-action {
+  padding: 0.5rem;
+  min-width: 40px;
+}
+
+/* Mobile First Adjustments */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
   }
+  
+  .train-table th, 
+  .train-table td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Desktop Adjustments */
+@media (min-width: 769px) {
+  .admin-content {
+    flex-direction: row;
+  }
+  
+  .form-section {
+    flex: 1;
+    min-width: 350px;
+  }
+  
+  .list-section {
+    flex: 2;
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .form-row .form-group {
+    flex: 1;
+  }
+}
+
+/* Very Small Screens */
+@media (max-width: 480px) {
+  .train-table th:nth-child(4),
+  .train-table td:nth-child(4),
+  .train-table th:nth-child(6),
+  .train-table td:nth-child(6) {
+    display: none;
+  }
+}

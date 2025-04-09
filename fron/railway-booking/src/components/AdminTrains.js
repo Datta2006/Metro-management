@@ -6,6 +6,7 @@ const AdminTrains = () => {
   const [trains, setTrains] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [currentTrain, setCurrentTrain] = useState(null);
   const [formData, setFormData] = useState({
@@ -19,6 +20,7 @@ const AdminTrains = () => {
     fare_per_km: ''
   });
   const [stations, setStations] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetchTrains();
@@ -27,13 +29,15 @@ const AdminTrains = () => {
 
   const fetchTrains = async () => {
     try {
+      setLoading(true);
       const response = await fetch('http://localhost:5000/api/admin/trains', {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
       });
       const data = await response.json();
       setTrains(data);
+      setError('');
     } catch (err) {
-      setError('Failed to fetch trains');
+      setError('Failed to fetch trains. Please try again.');
       console.error(err);
     } finally {
       setLoading(false);
@@ -77,6 +81,8 @@ const AdminTrains = () => {
       if (response.ok) {
         fetchTrains();
         resetForm();
+        setSuccess(`Train ${currentTrain ? 'updated' : 'added'} successfully!`);
+        setTimeout(() => setSuccess(''), 3000);
       } else {
         const data = await response.json();
         setError(data.error || 'Operation failed');
@@ -100,6 +106,7 @@ const AdminTrains = () => {
     });
     setCurrentTrain(null);
     setIsEditing(false);
+    setError('');
   };
 
   const editTrain = (train) => {
@@ -115,10 +122,11 @@ const AdminTrains = () => {
       fare_per_km: train.fare_per_km
     });
     setIsEditing(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const deleteTrain = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this train?')) return;
+    if (!window.confirm('Are you sure you want to delete this train? This action cannot be undone.')) return;
     
     try {
       const response = await fetch(`http://localhost:5000/api/admin/trains/${id}`, {
@@ -128,6 +136,8 @@ const AdminTrains = () => {
 
       if (response.ok) {
         fetchTrains();
+        setSuccess('Train deleted successfully!');
+        setTimeout(() => setSuccess(''), 3000);
       } else {
         const data = await response.json();
         setError(data.error || 'Delete failed');
@@ -138,19 +148,61 @@ const AdminTrains = () => {
     }
   };
 
+  const filteredTrains = trains.filter(train => 
+    train.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    train.number.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    train.source_code.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    train.destination_code.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="admin-trains"
+      className="admin-trains dark-theme"
     >
-      <h2>Manage Trains</h2>
+      <div className="admin-header">
+        <h2>Manage Trains</h2>
+        <div className="search-box">
+          <input
+            type="text"
+            placeholder="Search trains..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <i className="fas fa-search"></i>
+        </div>
+      </div>
       
-      {error && <div className="error-message">{error}</div>}
+      {error && (
+        <motion.div 
+          className="alert alert-error"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          {error}
+          <button onClick={() => setError('')} className="close-btn">
+            &times;
+          </button>
+        </motion.div>
+      )}
+      
+      {success && (
+        <motion.div 
+          className="alert alert-success"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          {success}
+          <button onClick={() => setSuccess('')} className="close-btn">
+            &times;
+          </button>
+        </motion.div>
+      )}
 
       <div className="admin-content">
-        <div className="form-section">
+        <div className="form-section card">
           <h3>{isEditing ? 'Edit Train' : 'Add New Train'}</h3>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
@@ -161,6 +213,7 @@ const AdminTrains = () => {
                 value={formData.name}
                 onChange={handleInputChange}
                 required
+                className="dark-input"
               />
             </div>
 
@@ -173,6 +226,7 @@ const AdminTrains = () => {
                   value={formData.number}
                   onChange={handleInputChange}
                   required
+                  className="dark-input"
                 />
               </div>
               
@@ -184,6 +238,8 @@ const AdminTrains = () => {
                   value={formData.total_seats}
                   onChange={handleInputChange}
                   required
+                  min="1"
+                  className="dark-input"
                 />
               </div>
             </div>
@@ -196,6 +252,7 @@ const AdminTrains = () => {
                   value={formData.source_station_id}
                   onChange={handleInputChange}
                   required
+                  className="dark-input"
                 >
                   <option value="">Select Source</option>
                   {stations.map(station => (
@@ -213,6 +270,7 @@ const AdminTrains = () => {
                   value={formData.destination_station_id}
                   onChange={handleInputChange}
                   required
+                  className="dark-input"
                 >
                   <option value="">Select Destination</option>
                   {stations.map(station => (
@@ -233,6 +291,7 @@ const AdminTrains = () => {
                   value={formData.departure_time}
                   onChange={handleInputChange}
                   required
+                  className="dark-input"
                 />
               </div>
               
@@ -244,6 +303,7 @@ const AdminTrains = () => {
                   value={formData.arrival_time}
                   onChange={handleInputChange}
                   required
+                  className="dark-input"
                 />
               </div>
             </div>
@@ -253,10 +313,12 @@ const AdminTrains = () => {
               <input
                 type="number"
                 step="0.01"
+                min="0"
                 name="fare_per_km"
                 value={formData.fare_per_km}
                 onChange={handleInputChange}
                 required
+                className="dark-input"
               />
             </div>
 
@@ -265,7 +327,7 @@ const AdminTrains = () => {
                 {isEditing ? 'Update Train' : 'Add Train'}
               </button>
               {isEditing && (
-                <button type="button" className="btn btn-danger" onClick={resetForm}>
+                <button type="button" className="btn btn-secondary" onClick={resetForm}>
                   Cancel
                 </button>
               )}
@@ -273,48 +335,91 @@ const AdminTrains = () => {
           </form>
         </div>
 
-        <div className="list-section">
+        <div className="list-section card">
           <h3>Train List</h3>
           {loading ? (
-            <div className="spinner"></div>
-          ) : (
-            <div className="train-table">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Number</th>
-                    <th>Name</th>
-                    <th>Route</th>
-                    <th>Seats</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {trains.map(train => (
-                    <tr key={train.id}>
-                      <td>{train.number}</td>
-                      <td>{train.name}</td>
-                      <td>{train.source_code} to {train.destination_code}</td>
-                      <td>{train.available_seats}/{train.total_seats}</td>
-                      <td className="actions">
-                        <button 
-                          className="btn btn-sm btn-primary"
-                          onClick={() => editTrain(train)}
-                        >
-                          Edit
-                        </button>
-                        <button 
-                          className="btn btn-sm btn-danger"
-                          onClick={() => deleteTrain(train.id)}
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="loading-spinner">
+              <div className="spinner"></div>
+              <p>Loading trains...</p>
             </div>
+          ) : (
+            <>
+              <div className="table-info">
+                <span>Showing {filteredTrains.length} of {trains.length} trains</span>
+              </div>
+              <div className="train-table-container">
+                <table className="train-table">
+                  <thead>
+                    <tr>
+                      <th>Number</th>
+                      <th>Name</th>
+                      <th>Route</th>
+                      <th>Timing</th>
+                      <th>Seats</th>
+                      <th>Fare/KM</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredTrains.length > 0 ? (
+                      filteredTrains.map(train => (
+                        <tr key={train.id}>
+                          <td className="font-mono">{train.number}</td>
+                          <td className="font-bold">{train.name}</td>
+                          <td>
+                            <div className="route-info">
+                              <span className="source">{train.source_code}</span>
+                              <span className="arrow">→</span>
+                              <span className="destination">{train.destination_code}</span>
+                            </div>
+                          </td>
+                          <td>
+                            <div className="timing-info">
+                              <span>{train.departure_time}</span>
+                              <span>to</span>
+                              <span>{train.arrival_time}</span>
+                            </div>
+                          </td>
+                          <td>
+                            <div className="seats-info">
+                              <span className={train.available_seats < train.total_seats * 0.2 ? 'text-warning' : ''}>
+                                {train.available_seats}
+                              </span>
+                              <span>/</span>
+                              <span>{train.total_seats}</span>
+                            </div>
+                          </td>
+                          <td className="font-mono">₹{train.fare_per_km}</td>
+                          <td className="actions">
+                            <button 
+                              className="btn-action btn-edit"
+                              onClick={() => editTrain(train)}
+                              title="Edit"
+                            >
+                              <i className="fas fa-edit"></i>
+                            </button>
+                            <button 
+                              className="btn-action btn-delete"
+                              onClick={() => deleteTrain(train.id)}
+                              title="Delete"
+                            >
+                              <i className="fas fa-trash"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="7" className="no-results">
+                          <i className="fas fa-train"></i>
+                          <p>No trains found matching your search</p>
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </>
           )}
         </div>
       </div>

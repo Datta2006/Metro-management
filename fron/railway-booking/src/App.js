@@ -1,9 +1,9 @@
-// App.js
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import ErrorBoundary from './components/ErrorBoundary';
 import './App.css';
+
 const pageVariants = {
   initial: { opacity: 0 },
   in: { opacity: 1 },
@@ -13,6 +13,7 @@ const pageVariants = {
 const pageTransition = {
   duration: 0.3
 };
+
 // Lazy load components
 const Login = React.lazy(() => import('./components/Login'));
 const Register = React.lazy(() => import('./components/Register'));
@@ -47,12 +48,27 @@ function App() {
         return;
       }
 
-      setAuthState({
-        isAuthenticated: true,
-        isLoading: false,
-        user: JSON.parse(userData),
-        error: null
-      });
+      try {
+        const parsedUser = JSON.parse(userData);
+        setAuthState({
+          isAuthenticated: true,
+          isLoading: false,
+          user: {
+            ...parsedUser,
+            // Normalize is_admin to boolean
+            is_admin: Boolean(parsedUser.is_admin)
+          },
+          error: null
+        });
+      } catch (error) {
+        console.error('Error parsing user data:', error);
+        setAuthState({
+          isAuthenticated: false,
+          isLoading: false,
+          user: null,
+          error: 'Error loading user data'
+        });
+      }
     };
 
     checkAuth();
@@ -62,7 +78,11 @@ function App() {
     setAuthState(prev => ({
       ...prev,
       isAuthenticated,
-      user,
+      user: user ? {
+        ...user,
+        // Normalize is_admin to boolean when setting user
+        is_admin: Boolean(user.is_admin)
+      } : null,
       error: null
     }));
   };
@@ -76,6 +96,11 @@ function App() {
     );
   }
 
+  // Helper function to check admin status
+  const isAdmin = () => {
+    return authState.isAuthenticated && Boolean(authState.user?.is_admin);
+  };
+
   return (
     <ErrorBoundary>
       <AnimatePresence mode="wait">
@@ -83,7 +108,7 @@ function App() {
           <Routes location={location} key={location.pathname}>
             <Route path="/login" element={
               authState.isAuthenticated ? (
-                <Navigate to="/dashboard" replace />
+                <Navigate to={isAdmin() ? '/admin' : '/dashboard'} replace />
               ) : (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                   <Login setAuthentication={setAuthentication} />
@@ -94,7 +119,7 @@ function App() {
               path="/register"
               element={
                 authState.isAuthenticated ? (
-                  <Navigate to="/dashboard" replace />
+                  <Navigate to={isAdmin() ? '/admin' : '/dashboard'} replace />
                 ) : (
                   <motion.div
                     initial="initial"
@@ -111,7 +136,7 @@ function App() {
             <Route
               path="/dashboard"
               element={
-                authState.isAuthenticated ? (
+                authState.isAuthenticated && !isAdmin() ? (
                   <motion.div
                     initial="initial"
                     animate="in"
@@ -125,14 +150,14 @@ function App() {
                     />
                   </motion.div>
                 ) : (
-                  <Navigate to="/login" state={{ from: location }} replace />
+                  <Navigate to={isAdmin() ? '/admin' : '/login'} state={{ from: location }} replace />
                 )
               }
             />
             <Route
               path="/admin"
               element={
-                authState.isAuthenticated && authState.user?.role === 'admin' ? (
+                isAdmin() ? (
                   <motion.div
                     initial="initial"
                     animate="in"
@@ -201,7 +226,10 @@ function App() {
                       user={authState.user} 
                       setUser={(user) => setAuthState(prev => ({
                         ...prev,
-                        user
+                        user: {
+                          ...user,
+                          is_admin: Boolean(user.is_admin)
+                        }
                       }))} 
                     />
                   </motion.div>
@@ -216,7 +244,7 @@ function App() {
                 <Navigate
                   to={
                     authState.isAuthenticated
-                      ? authState.user?.role === 'admin'
+                      ? isAdmin()
                         ? '/admin'
                         : '/dashboard'
                       : '/login'
@@ -229,7 +257,6 @@ function App() {
         </React.Suspense>
       </AnimatePresence>
     </ErrorBoundary>
-    
   );
 }
 
