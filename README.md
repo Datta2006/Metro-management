@@ -206,13 +206,13 @@ Update your `server.js` file to match your local MySQL credentials:
 ```js
 const connection = mysql.createConnection({
     host: "localhost",
-    user: "your_username_here",
+    user: "root",
     password: "your_password_here",
     database: "railway_db"
 });
 ```
 
-⚠️ Replace `your_username_here` and `your_password_here` with your MySQL user credentials.
+ Replace `your_username_here` and `your_password_here` with your MySQL user credentials.
 
 ---
 
