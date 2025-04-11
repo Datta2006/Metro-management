@@ -8,7 +8,9 @@ import Feedback from './Feedback1';
 import './Dashboard.css';
 import TrainSlider from './TrainSlider';
 import detectEthereumProvider from '@metamask/detect-provider';
+import MapComponent from './Map';
 
+import 'leaflet/dist/leaflet.css';
 
 const Dashboard = ({ setAuthentication, user }) => {
   const [walletAddress, setWalletAddress] = useState(null);
@@ -228,6 +230,9 @@ const Dashboard = ({ setAuthentication, user }) => {
 
 
 <section className="feedback-section">
+  <br></br>
+<MapComponent/>
+<br></br>
   <h2>We'd love your feedback</h2>
   <Feedback />
 </section>
