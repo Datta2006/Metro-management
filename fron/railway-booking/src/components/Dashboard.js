@@ -7,14 +7,38 @@ import SearchForm from './SearchForm';
 import Feedback from './Feedback1';
 import './Dashboard.css';
 import TrainSlider from './TrainSlider';
+import detectEthereumProvider from '@metamask/detect-provider';
+
 
 const Dashboard = ({ setAuthentication, user }) => {
+  const [walletAddress, setWalletAddress] = useState(null);
+
   const [trains, setTrains] = useState([]);
   const [bookings, setBookings] = useState([]);
   const [isLoading, setIsLoading] = useState({
     trains: false,
     bookings: false
   });
+  const connectWallet = async () => {
+    try {
+      const provider = await detectEthereumProvider();
+      if (provider) {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        setWalletAddress(accounts[0]);
+        console.log('Connected MetaMask address:', accounts[0]);
+      } else {
+        alert('MetaMask not detected. Please install it.');
+      }
+    } catch (error) {
+      console.error('MetaMask connection error:', error);
+      alert('MetaMask connection failed');
+    }
+  };
+  useEffect(() => {
+    connectWallet();
+    
+  }, []);
+    
   const [error, setError] = useState('');
   const [searchParams, setSearchParams] = useState({
     source: '',
@@ -127,6 +151,8 @@ const Dashboard = ({ setAuthentication, user }) => {
       <header className="header">
         <div className="logo">
           <h1>Metro Booking System</h1>
+          
+
         </div>
         <nav className="nav-links">
           <Link to="/profile" className="nav-link">Profile</Link>
@@ -135,7 +161,10 @@ const Dashboard = ({ setAuthentication, user }) => {
       </header>
 
       <main>
+
         <TrainSlider/>
+        <br></br>
+        {walletAddress && <p style={{ fontSize: '0.8em' }}><b>Wallet:</b> {walletAddress}</p>}
         <br/>
         <section className="search-section">
           <h2>Search Trains</h2>
