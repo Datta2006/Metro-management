@@ -9,8 +9,9 @@ import './Dashboard.css';
 import TrainSlider from './TrainSlider';
 import detectEthereumProvider from '@metamask/detect-provider';
 import MapComponent from './Map';
-
+import TextHoverEffect from './text'
 import 'leaflet/dist/leaflet.css';
+
 
 const Dashboard = ({ setAuthentication, user }) => {
   const [walletAddress, setWalletAddress] = useState(null);
@@ -150,9 +151,16 @@ const Dashboard = ({ setAuthentication, user }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
+      
       <header className="header">
         <div className="logo">
-          <h1>Metro Booking System</h1>
+        <div className="p-10">
+      <TextHoverEffect 
+        text="Metro Booking System" 
+        duration={0.4} // Adjust animation speed
+      />
+    </div>
+          {/* <h1>Metro Booking System</h1> */}
           
 
         </div>
