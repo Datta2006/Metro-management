@@ -156,7 +156,7 @@ const Dashboard = ({ setAuthentication, user }) => {
         <div className="logo">
         <div className="p-10">
       <TextHoverEffect 
-        text="Metro Booking System" 
+        text="Metro Management System" 
         duration={0.4} // Adjust animation speed
       />
     </div>
