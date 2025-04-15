@@ -21,7 +21,18 @@ A full-stack metro ticket booking web application built with **React.js**, **Nod
 - **Bcrypt.js** — For hashing passwords
 - **JWT (JSON Web Tokens)** — For user authentication
 
+
+### others
+- jspdf - to generate pdf
+- leaflet - to generate map
+- metamask - to connect to digital currency
+- react-icons
+- frame-motion
+- swiper
+- react-router-dom
+  
 ---
+
 
 ## 👤 User Features
 
