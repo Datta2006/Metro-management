@@ -25,19 +25,23 @@ A full-stack metro ticket booking web application built with **React.js**, **Nod
 
 ## 👤 User Features
 
-- ✅ User registration and login
-- 🎫 Book metro/train tickets
-- 🔎 View train schedules and stations
-- 🧾 View and manage personal bookings
+- User registration and login
+- Book metro/train tickets
+- View train schedules and stations
+- View and manage personal bookings
+- Can write Feedback
+- Can use Maps to plan their journey
+- Can connect Metamask to pay by crypto currency
+- Can use chatbot for help
 
 ---
 
 ## 🛠 Admin Features
 
-- ➕ Add new trains and stations
-- 🗂 Manage and update train information
-- 👤 View all registered users
-- ❌ Delete or modify train/station entries
+- Add new trains and stations
+- Manage and update train information
+- View all registered users
+- Delete or modify train/station entries
 
 ---
 
