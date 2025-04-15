@@ -228,7 +228,14 @@ const connection = mysql.createConnection({
 ## 📸 Screenshots / Demo
 
 
-<img src="File 1.png" width="500"/><img src="File 2.png" width="500"/><img src="File 3.png" width="500"/><img src="File 4.png" width="500"/><img src="File 5.png" width="500"/>
+<img src="assets/File 1.png" width="500"/>
+<img src="assets/File 2.png" width="500"/>
+<img src="assets/File 3.png" width="500"/>
+<img src="assets/File 4.png" width="500"/>
+<img src="assets/File 5.png" width="500"/>
+<img src="assets/File 6.png" width="200"/>
+<img src="assets/File 7.png" width="500"/>
+<img src="assets/File 8.png" width="500"/>
 
 
 
