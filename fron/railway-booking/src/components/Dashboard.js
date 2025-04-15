@@ -207,7 +207,39 @@ const Dashboard = ({ setAuthentication, user }) => {
         <br></br>
         <ImportantNotice />
         <br></br>
-        {walletAddress && <p style={{ fontSize: '0.8em' }}><b>Wallet:</b> {walletAddress}</p>}
+        {walletAddress && (
+  <div style={{
+    backgroundColor: '#1E2A3A',
+    padding: '12px',
+    borderRadius: '8px',
+    marginTop: '10px',
+    borderLeft: '3px solid #3D7BFF',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px'
+  }}>
+    <svg 
+      width="16" 
+      height="16" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ flexShrink: 0 }}
+    >
+      <path d="M21 12C21 13.1046 20.1046 14 19 14H5C3.89543 14 3 13.1046 3 12C3 10.8954 3.89543 10 5 10H19C20.1046 10 21 10.8954 21 12Z" fill="#3D7BFF"/>
+      <path d="M17 8V16M7 8V16" stroke="#3D7BFF" strokeWidth="2" strokeLinecap="round"/>
+    </svg>
+    <p style={{
+      margin: 0,
+      fontSize: '0.85em',
+      color: '#E0E0E0',
+      fontFamily: 'monospace',
+      wordBreak: 'break-all'
+    }}>
+      <span style={{ color: '#3D7BFF', fontWeight: '600' }}>Connected:</span> {walletAddress}
+    </p>
+  </div>
+)}
         <br/>
         <section className="search-section">
           <h2>Search Trains</h2>
@@ -280,6 +312,65 @@ const Dashboard = ({ setAuthentication, user }) => {
   
   
 </section>
+<div style={{
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '12px',
+  marginTop: '20px'
+}}>
+  {/* Wallet Address Display (your existing code) */}
+  {walletAddress && (
+    <div style={{
+      backgroundColor: '#1E2A3A',
+      padding: '12px',
+      borderRadius: '8px',
+      borderLeft: '3px solid #3D7BFF'
+    }}>
+      <p style={{ margin: 0, fontSize: '0.85em', color: '#E0E0E0' }}>
+        <b style={{ color: '#3D7BFF' }}>Wallet:</b> {walletAddress}
+      </p>
+    </div>
+  )}
+
+  {/* New Contact Button Column */}
+  <div style={{
+    backgroundColor: '#1E2A3A',
+    padding: '16px',
+    borderRadius: '8px',
+    borderLeft: '3px solid #FFA726' // Orange accent for contact
+  }}>
+    <h3 style={{ 
+      marginTop: 0,
+      marginBottom: '12px',
+      color: '#FFA726',
+      fontSize: '1em'
+    }}>
+      Direct contact?? 9am to 5pm
+    </h3>
+    <a 
+      href="https://tawk.to/chat/67fe7349d9917b190cb96c2e/default" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      style={{
+        display: 'inline-block',
+        backgroundColor: '#FFA726',
+        color: '#0A0A12',
+        padding: '10px 16px',
+        borderRadius: '6px',
+        textDecoration: 'none',
+        fontWeight: '600',
+        fontSize: '0.9em',
+        transition: 'all 0.2s ease',
+        ':hover': {
+          backgroundColor: '#FF9800',
+          transform: 'translateY(-1px)'
+        }
+      }}
+    >
+      click here
+    </a>
+  </div>
+</div>
 <ContactUs/>
         </section>
         {/* <section className="feedback-section">
