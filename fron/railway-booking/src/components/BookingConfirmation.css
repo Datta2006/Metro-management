@@ -1,96 +1,319 @@
+/* BookingConfirmation.css - Dark Theme */
 .booking-confirmation-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid #333;
+}
+
+.confirmation-card {
+  background: #2a2a2a;
+  border-radius: 1rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  border: 1px solid #444;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.confirmation-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.confirmation-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #444;
+  position: relative;
+}
+
+.confirmation-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 25%;
+  right: 25%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #4a90e2, transparent);
+}
+
+.confirmation-header h1 {
+  color: #4a90e2;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(74, 144, 226, 0.3);
+}
+
+.pnr {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(74, 144, 226, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  display: inline-block;
+  border: 1px solid rgba(74, 144, 226, 0.3);
+}
+
+.confirmation-details {
+  margin: 2rem 0;
+}
+
+.train-info {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #444;
+}
+
+.train-info h2 {
+  color: #fff;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.train-info h2::before {
+  content: '🚆';
+  font-size: 1.2rem;
+}
+
+.timing-info {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+  background: #333;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #444;
+}
+
+.timing-section {
+  flex: 1;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.timing-section .time {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.3rem;
+}
+
+.timing-section .station {
+  font-size: 1rem;
+  color: #b0b0b0;
+}
+
+.timing-section .date {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  margin-top: 0.3rem;
+}
+
+.duration-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.duration-line {
+  width: 2px;
+  height: 30px;
+  background: linear-gradient(to bottom, #4a90e2, #6a5acd);
+  margin: 0.5rem 0;
+}
+
+.duration-value {
+  color: #b0b0b0;
+  font-size: 0.9rem;
+}
+
+.passenger-info {
+  margin: 2rem 0;
+  background: #333;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #444;
+}
+
+.passenger-info h3 {
+  margin-bottom: 1.5rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.passenger-info h3::before {
+  content: '👥';
+  font-size: 1.2rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #2a2a2a;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #444;
+}
+
+th {
+  background-color: #333;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+td {
+  color: #e0e0e0;
+}
+
+tr:hover td {
+  background: rgba(74, 144, 226, 0.1);
+}
+
+.payment-info {
+  margin-top: 2rem;
+  background: #333;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #444;
+}
+
+.payment-info h3 {
+  margin-bottom: 1.5rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.payment-info h3::before {
+  content: '💳';
+  font-size: 1.2rem;
+}
+
+.payment-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.payment-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.payment-label {
+  color: #b0b0b0;
+  font-size: 0.9rem;
+}
+
+.payment-value {
+  color: #fff;
+  font-weight: 500;
+}
+
+.status-success {
+  color: #2ecc71;
+  font-weight: 600;
+  background: rgba(46, 204, 113, 0.1);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.confirmation-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+.confirmation-btn {
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.confirmation-btn.primary {
+  background: linear-gradient(135deg, #4a90e2, #3a7bc8);
+  color: white;
+  border: none;
+  box-shadow: 0 2px 10px rgba(74, 144, 226, 0.3);
+}
+
+.confirmation-btn.primary:hover {
+  background: linear-gradient(135deg, #3a7bc8, #4a90e2);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+}
+
+.confirmation-btn.secondary {
+  background: transparent;
+  color: #b0b0b0;
+  border: 1px solid #444;
+}
+
+.confirmation-btn.secondary:hover {
+  color: #fff;
+  border-color: #666;
+  transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .booking-confirmation-container {
+    padding: 1rem;
   }
   
   .confirmation-card {
-    background: white;
-    border-radius: 1rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
-  }
-  
-  .confirmation-header {
-    text-align: center;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .confirmation-header h1 {
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-  }
-  
-  .pnr {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #333;
-  }
-  
-  .confirmation-details {
-    margin: 2rem 0;
-  }
-  
-  .train-info {
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .train-info h2 {
-    color: #333;
-    margin-bottom: 0.5rem;
+    padding: 1.5rem;
   }
   
   .timing-info {
-    display: flex;
-    gap: 2rem;
-    margin-top: 1rem;
+    flex-direction: column;
+    gap: 1rem;
   }
   
-  .passenger-info {
-    margin: 2rem 0;
-  }
-  
-  .passenger-info h3 {
-    margin-bottom: 1rem;
-    color: #333;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  th, td {
-    padding: 0.75rem;
-    text-align: left;
-    border-bottom: 1px solid #eee;
-  }
-  
-  th {
-    background-color: #f8f9fa;
-    font-weight: 600;
-  }
-  
-  .payment-info {
-    margin-top: 2rem;
-  }
-  
-  .payment-info h3 {
-    margin-bottom: 1rem;
-    color: #333;
-  }
-  
-  .status-success {
-    color: #28a745;
-    font-weight: 600;
+  .payment-details {
+    grid-template-columns: 1fr;
   }
   
   .confirmation-actions {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
+    flex-direction: column;
   }
+  
+  .confirmation-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+body {
+  background-color: #121212; /* Dark background for entire page */
+  color: #e0e0e0; /* Default light text color */
+  margin: 0;
+}

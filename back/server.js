@@ -979,6 +979,62 @@ app.get('/api/admin/trains/:id/stops', verifyToken(true), async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch train stops' });
   }
 });
+app.post('/api/admin/stations', verifyToken(true), async (req, res) => {
+  const { name, code, city, state } = req.body;
+  
+  try {
+    // Validate required fields
+    if (!name || !code || !city || !state) {
+      return res.status(400).json({ 
+        error: 'Name, code, city, and state are required',
+        missing: {
+          name: !name,
+          code: !code,
+          city: !city,
+          state: !state
+        }
+      });
+    }
+
+    // Check if station already exists
+    const [existingStations] = await db.query(
+      'SELECT id FROM stations WHERE name = ? OR code = ?',
+      [name, code]
+    );
+    
+    if (existingStations.length > 0) {
+      return res.status(400).json({ 
+        error: 'Station already exists',
+        conflicts: {
+          name: existingStations.some(s => s.name === name),
+          code: existingStations.some(s => s.code === code)
+        }
+      });
+    }
+
+    // Insert new station
+    const [result] = await db.query(
+      'INSERT INTO stations (name, code, city, state) VALUES (?, ?, ?, ?)',
+      [name, code, city, state]
+    );
+
+    // Return the created station
+    const [stations] = await db.query('SELECT * FROM stations WHERE id = ?', [result.insertId]);
+    
+    res.status(201).json({
+      success: true,
+      station: stations[0],
+      message: 'Station created successfully'
+    });
+  } catch (err) {
+    console.error('Station creation error:', err);
+    res.status(500).json({ 
+      error: 'Failed to create station',
+      details: err.message,
+      code: err.code
+    });
+  }
+});
 
 // Add train stop (admin only)
 app.post('/api/admin/trains/:id/stops', verifyToken(true), async (req, res) => {

@@ -26,7 +26,7 @@ const AdminPanel = ({ setAuthentication, user }) => {
     >
       <header className="header">
         <div className="logo">
-          <span>👑</span>
+         
           <h1>Admin Panel</h1>
         </div>
         <nav className="nav-links">

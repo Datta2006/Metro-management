@@ -1,0 +1,141 @@
+/* Contact.css */
+.contact-container {
+    background: #000;
+    padding: 4rem 2rem;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .contact-card {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(15, 15, 15, 0.9);
+    border-radius: 12px;
+    padding: 3rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #fff;
+    position: relative;
+    display: inline-block;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #ff4d4d, #f9cb28);
+  }
+  
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  
+  .contact-item {
+    background: rgba(30, 30, 30, 0.7);
+    border-radius: 8px;
+    padding: 2rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-left: 3px solid #f9cb28;
+  }
+  
+  .contact-header {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .contact-icon {
+    font-size: 1.8rem;
+    color: #f9cb28;
+    transition: all 0.3s ease;
+  }
+  
+  .contact-item h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+    color: #fff;
+  }
+  
+  .contact-content {
+    display: block;
+    color: #bbb;
+    text-decoration: none;
+    transition: all 0.3s;
+    line-height: 1.7;
+    padding-left: 3.2rem;
+    font-size: 1.05rem;
+  }
+  
+  .contact-content:hover {
+    color: #f9cb28;
+    transform: translateX(5px);
+  }
+  
+  .external-icon {
+    margin-left: 8px;
+    font-size: 0.9rem;
+    vertical-align: middle;
+    opacity: 0.7;
+  }
+  
+  .contact-phones {
+    padding-left: 3.2rem;
+  }
+  
+  .phone-item {
+    margin-bottom: 1.2rem;
+  }
+  
+  .phone-label {
+    font-size: 0.95rem;
+    color: #999;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+  }
+  
+  .phone-number {
+    color: #ddd;
+    text-decoration: none;
+    transition: all 0.3s;
+    font-size: 1.1rem;
+    font-weight: 500;
+    display: inline-block;
+  }
+  
+  .phone-number:hover {
+    color: #f9cb28;
+    transform: translateX(3px);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .contact-card {
+      padding: 2rem 1.5rem;
+    }
+    
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .contact-content, .contact-phones {
+      padding-left: 0;
+    }
+    
+    .section-title {
+      font-size: 2rem;
+    }
+  }

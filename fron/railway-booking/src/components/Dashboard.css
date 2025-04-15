@@ -1,9 +1,13 @@
 :root {
   --primary-color: #3b82f6; /* Tailwind blue-500 */
   --primary-dark: #2563eb;  /* Tailwind blue-600 */
-  --text-dark: #1f2937;
-  --text-light: #6b7280;
-  --bg-light: #f9fafb;
+  --bg-dark: #1a1a1a;       /* Dark background */
+  --bg-darker: #121212;     /* Even darker for contrast */
+  --card-dark: #242424;     /* Card backgrounds */
+  --text-light: #e5e7eb;    /* Light text for dark bg */
+  --text-lighter: #f3f4f6;  /* Brighter text */
+  --text-muted: #9ca3af;    /* Muted text */
+  --border-dark: #374151;   /* Border color */
 }
 
 /* Core Container */
@@ -11,8 +15,10 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
-  background-color: var(--bg-light);
+  background-color: var(--bg-dark);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-light);
+  min-height: 100vh;
 }
 
 /* Header */
@@ -22,36 +28,21 @@
   align-items: center;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #e5e7eb;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  border-bottom: 1px solid var(--border-dark);
+  background-color: var(--bg-darker);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .logo h1 {
   font-size: 1.75rem;
-  color: var(--text-dark);
+  color: var(--text-lighter);
   margin: 0;
 }
 
 /* Navigation */
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-}
-
 .nav-links a,
 .nav-link {
-  text-decoration: none;
-  color: var(--text-dark);
-  font-weight: 500;
-  transition: color 0.2s;
+  color: var(--text-light);
 }
 
 .nav-link:hover {
@@ -60,82 +51,117 @@
 
 /* Sections */
 .search-section {
-  background: white;
+  background: var(--card-dark);
   border-radius: 1rem;
   padding: 2rem;
   margin-bottom: 2rem;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
-}
-
-.trains-section,
-.bookings-section {
-  margin-bottom: 3rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-dark);
 }
 
 .trains-section h2,
 .bookings-section h2 {
-  font-size: 1.5rem;
-  color: var(--text-dark);
-  margin-bottom: 1.25rem;
-}
-
-/* Grids */
-.grid {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.grid-cols-1 {
-  grid-template-columns: repeat(1, 1fr);
-}
-
-.grid-cols-2 {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.grid-cols-3 {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-@media (max-width: 1024px) {
-  .grid-cols-3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .grid-cols-2,
-  .grid-cols-3 {
-    grid-template-columns: 1fr;
-  }
-
-  .nav-links {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
-  }
+  color: var(--text-lighter);
 }
 
 /* Error */
 .error-message {
-  background-color: #fee2e2;
-  color: #991b1b;
-  padding: 1rem;
-  border-radius: 0.75rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  font-weight: 500;
+  background-color: #450a0a;
+  color: #fca5a5;
+  border: 1px solid #7f1d1d;
 }
 
-/* Spinner */
+/* Feedback Modal */
+.feedback-modal-content {
+  background: var(--card-dark);
+  border: 1px solid var(--border-dark);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.close-feedback-btn {
+  color: var(--text-muted);
+}
+
+.close-feedback-btn:hover {
+  color: var(--text-light);
+}
+
+/* Additional dark mode elements */
+.card {
+  background-color: var(--card-dark);
+  border: 1px solid var(--border-dark);
+  color: var(--text-light);
+}
+
+input, select, textarea {
+  background-color: var(--bg-darker);
+  border: 1px solid var(--border-dark);
+  color: var(--text-light);
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: -1px;
+}
+
+/* Table styles for dark mode */
+table {
+  border-color: var(--border-dark);
+}
+
+th {
+  background-color: var(--bg-darker);
+  color: var(--text-lighter);
+}
+
+td {
+  background-color: var(--card-dark);
+  border-color: var(--border-dark);
+}
+
+tr:hover td {
+  background-color: #2d2d2d;
+}
+
+/* Button adjustments */
+.btn {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn:hover {
+  background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+  background-color: var(--bg-darker);
+  color: var(--text-light);
+  border: 1px solid var(--border-dark);
+}
+
+.btn-secondary:hover {
+  background-color: #2d2d2d;
+}
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-dark);
+  color: var(--text-lighter);
+}
+
 .spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-left-color: var(--primary-color);
+  border: 4px solid var(--border-dark);
+  border-top: 4px solid var(--primary-color);
   border-radius: 50%;
+  width: 36px;
+  height: 36px;
   animation: spin 1s linear infinite;
-  margin: 2rem auto;
+  margin: 20px auto;
 }
 
 @keyframes spin {
@@ -144,77 +170,8 @@
   }
 }
 
-/* Section Headers */
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
-
-/* Refresh Button */
-.btn-refresh {
-  background: var(--primary-color);
-  color: white;
-  padding: 0.5rem 1.25rem;
-  border: none;
-  border-radius: 0.5rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.btn-refresh:hover {
-  background: var(--primary-dark);
-}
-
-.btn-refresh:disabled {
-  background: #d1d5db;
-  cursor: not-allowed;
-}
-
-/* Bookings */
 .bookings-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-
-/* Feedback Modal */
-.feedback-modal {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.feedback-modal-content {
-  background: white;
-  padding: 2rem;
-  border-radius: 1rem;
-  width: 90%;
-  max-width: 800px;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-.close-feedback-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: var(--text-light);
-  transition: color 0.2s ease;
-}
-
-.close-feedback-btn:hover {
-  color: var(--text-dark);
+  gap: 1rem;
 }

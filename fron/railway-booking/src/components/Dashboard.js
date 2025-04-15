@@ -11,6 +11,9 @@ import detectEthereumProvider from '@metamask/detect-provider';
 import MapComponent from './Map';
 import TextHoverEffect from './text'
 import 'leaflet/dist/leaflet.css';
+import ContactUs from './Contact';
+import ImportantNotice from './ImportantNotice';
+import FAQ from './FAQ';
 
 
 const Dashboard = ({ setAuthentication, user }) => {
@@ -37,6 +40,7 @@ const Dashboard = ({ setAuthentication, user }) => {
       alert('MetaMask connection failed');
     }
   };
+  
   useEffect(() => {
     connectWallet();
     
@@ -143,6 +147,15 @@ const Dashboard = ({ setAuthentication, user }) => {
   const handleCloseFeedback = () => {
     setSelectedTrainForFeedback(null);
   };
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+      (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://tawk.to/chat/67fe7349d9917b190cb96c2e/default';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+      })();
 
   return (
     <motion.div
@@ -150,17 +163,34 @@ const Dashboard = ({ setAuthentication, user }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-    >
+    ><div>
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `
+          var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+          (function () {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = "https://embed.tawk.to/b363b62eba670696d21259a97e56fe9023fe9812/1hvh1f5n1";
+            s1.charset = "UTF-8";
+            s1.setAttribute("crossorigin", "*");
+            s0.parentNode.insertBefore(s1, s0);
+          })();
+        `,
+      }}
+    />
+  </div>
       
       <header className="header">
         <div className="logo">
-        <div className="p-10">
+        {/* <div className="p-10">
       <TextHoverEffect 
-        text="Metro Management System" 
+        text="Datta" 
         duration={0.4} // Adjust animation speed
       />
-    </div>
-          {/* <h1>Metro Booking System</h1> */}
+    </div> */}
+          <h1>Metro Booking System</h1>
           
 
         </div>
@@ -169,10 +199,13 @@ const Dashboard = ({ setAuthentication, user }) => {
           <button onClick={handleLogout} className="btn btn-danger">Logout</button>
         </nav>
       </header>
-
+     
       <main>
-
+      
+       
         <TrainSlider/>
+        <br></br>
+        <ImportantNotice />
         <br></br>
         {walletAddress && <p style={{ fontSize: '0.8em' }}><b>Wallet:</b> {walletAddress}</p>}
         <br/>
@@ -183,6 +216,7 @@ const Dashboard = ({ setAuthentication, user }) => {
             setSearchParams={setSearchParams}
             handleSearch={handleSearch}
           />
+           
         </section>
 
         {isLoading.trains && <div className="spinner"></div>}
@@ -236,14 +270,17 @@ const Dashboard = ({ setAuthentication, user }) => {
             </div>
           )}
 
-
+<FAQ/>
 <section className="feedback-section">
   <br></br>
 <MapComponent/>
 <br></br>
-  <h2>We'd love your feedback</h2>
-  <Feedback />
+<h2>We'd love your feedback</h2>
+<div className="feedback-root"><Feedback /></div>
+  
+  
 </section>
+<ContactUs/>
         </section>
         {/* <section className="feedback-section">
           <h2>
