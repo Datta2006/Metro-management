@@ -1,13 +1,17 @@
-/* App.css */
 :root {
   --primary-color: #3a86ff;
   --secondary-color: #8338ec;
   --accent-color: #ff006e;
-  --light-color: #f8f9fa;
-  --dark-color: #212529;
+  --light-color: #2c2f33;
+  --dark-color: #f8f9fa;
   --success-color: #28a745;
   --danger-color: #dc3545;
   --warning-color: #ffc107;
+  --bg-color: #121417;
+  --card-bg: #1e2126;
+  --border-color: #2a2d32;
+  --input-bg: #2b2f36;
+  --hover-bg: rgba(255, 255, 255, 0.05);
 }
 
 * {
@@ -18,12 +22,12 @@
 }
 
 body {
-  background-color: #f5f7fa;
+  background-color: var(--bg-color);
   color: var(--dark-color);
   line-height: 1.6;
 }
 
-/* Button styles */
+/* Buttons */
 .btn {
   padding: 0.75rem 1.5rem;
   border: none;
@@ -42,51 +46,47 @@ body {
   background-color: var(--primary-color);
   color: white;
 }
-
 .btn-primary:hover {
   background-color: #2a75e6;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(58, 134, 255, 0.4);
 }
 
 .btn-secondary {
   background-color: var(--secondary-color);
   color: white;
 }
-
 .btn-secondary:hover {
   background-color: #7229d6;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(131, 56, 236, 0.4);
 }
 
 .btn-danger {
   background-color: var(--danger-color);
   color: white;
 }
-
 .btn-danger:hover {
   background-color: #c82333;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
 }
 
-/* Card styles */
+/* Cards */
 .card {
-  background: white;
+  background: var(--card-bg);
   border-radius: 1rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
 }
 
-/* Form styles */
+/* Forms */
 .form-group {
   margin-bottom: 1.5rem;
 }
@@ -101,7 +101,9 @@ body {
 .form-control {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 1px solid #ddd;
+  background-color: var(--input-bg);
+  border: 1px solid var(--border-color);
+  color: white;
   border-radius: 0.5rem;
   font-size: 1rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -110,10 +112,10 @@ body {
 .form-control:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.25);
+  box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.3);
 }
 
-/* Animation classes */
+/* Animations */
 .fade-in {
   animation: fadeIn 0.5s ease-in-out;
 }
@@ -128,11 +130,11 @@ body {
 }
 
 @keyframes slideUp {
-  from { 
+  from {
     opacity: 0;
     transform: translateY(20px);
   }
-  to { 
+  to {
     opacity: 1;
     transform: translateY(0);
   }
@@ -148,7 +150,7 @@ body {
   100% { transform: scale(1); }
 }
 
-/* Responsive grid */
+/* Grid */
 .grid {
   display: grid;
   gap: 1.5rem;
@@ -159,19 +161,18 @@ body {
 .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
 
+/* Responsive grid */
 @media (max-width: 1024px) {
   .grid-cols-4 { grid-template-columns: repeat(3, 1fr); }
 }
-
 @media (max-width: 768px) {
   .grid-cols-3, .grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
 }
-
 @media (max-width: 640px) {
   .grid-cols-2, .grid-cols-3, .grid-cols-4 { grid-template-columns: 1fr; }
 }
 
-/* Header styles */
+/* Header */
 .header {
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: white;
@@ -179,7 +180,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -208,10 +209,10 @@ body {
 }
 
 .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: var(--hover-bg);
 }
 
-/* Dashboard specific styles */
+/* Dashboard */
 .dashboard-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -219,11 +220,11 @@ body {
 }
 
 .search-section {
-  background-color: white;
+  background-color: var(--card-bg);
   border-radius: 1rem;
   padding: 1.5rem;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
 }
 
 .search-form {
@@ -236,6 +237,7 @@ body {
 .train-card {
   position: relative;
   overflow: hidden;
+  background: var(--card-bg);
 }
 
 .train-card::before {
@@ -248,38 +250,39 @@ body {
   background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
 }
 
-.train-card .train-info {
+.train-info {
   padding: 1.5rem;
 }
 
-.train-card .train-route {
+.train-route {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 1rem 0;
 }
 
-.train-card .train-stations {
+.train-stations {
   text-align: center;
 }
 
-.train-card .train-timings {
+.train-timings {
   display: flex;
   justify-content: space-between;
   margin-top: 1rem;
-  color: #666;
+  color: #bbb;
   font-size: 0.9rem;
 }
 
-.train-card .train-actions {
+.train-actions {
   display: flex;
   justify-content: space-between;
   margin-top: 1.5rem;
 }
 
-/* Booking card styles */
+/* Booking */
 .booking-card {
   border-left: 4px solid var(--primary-color);
+  background-color: var(--card-bg);
 }
 
 .booking-card.confirmed {
@@ -294,11 +297,11 @@ body {
   border-left-color: var(--warning-color);
 }
 
-/* Loading spinner */
+/* Spinner */
 .spinner {
   width: 40px;
   height: 40px;
-  border: 4px solid rgba(0, 0, 0, 0.1);
+  border: 4px solid rgba(255, 255, 255, 0.1);
   border-left-color: var(--primary-color);
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -309,20 +312,22 @@ body {
   to { transform: rotate(360deg); }
 }
 
-/* Responsive adjustments */
+/* Responsive tweaks */
 @media (max-width: 768px) {
   .header {
     flex-direction: column;
     padding: 1rem;
   }
-  
+
   .nav-links {
     margin-top: 1rem;
     flex-wrap: wrap;
     justify-content: center;
   }
-  
+
   .dashboard-container {
     padding: 1rem;
   }
 }
+
+

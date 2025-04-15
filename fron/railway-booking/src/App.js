@@ -14,6 +14,7 @@ const pageTransition = {
   duration: 0.3
 };
 
+
 // Lazy load components
 const Login = React.lazy(() => import('./components/Login'));
 const Register = React.lazy(() => import('./components/Register'));
@@ -34,6 +35,7 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
+    
     const checkAuth = async () => {
       const token = localStorage.getItem('token');
       const userData = localStorage.getItem('user');
@@ -72,6 +74,7 @@ function App() {
     };
 
     checkAuth();
+    
   }, []);
 
   const setAuthentication = (isAuthenticated, user = null) => {
@@ -95,7 +98,7 @@ function App() {
       </div>
     );
   }
-
+  
   // Helper function to check admin status
   const isAdmin = () => {
     return authState.isAuthenticated && Boolean(authState.user?.is_admin);

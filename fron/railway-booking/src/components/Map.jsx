@@ -118,46 +118,52 @@ const MapComponent = () => {
       maxWidth: '800px',
       margin: '20px auto',
       padding: '20px',
-      boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-      borderRadius: '8px'
+      backgroundColor: 'var(--card-dark)',
+      border: '1px solid var(--border-dark)',
+      borderRadius: '8px',
+      boxShadow: '0 0 15px rgba(0,0,0,0.3)',
+      color: 'var(--text-light)'
     }}>
-      <h2 style={{ textAlign: 'center', color: '#333' }}>Interactive Map</h2>
-      <p style={{ textAlign: 'center', marginBottom: '20px' }}>
+      <h2 style={{ textAlign: 'center', color: 'var(--text-lighter)' }}>Interactive Map</h2>
+      <p style={{ textAlign: 'center', marginBottom: '20px', color: 'var(--text-muted)' }}>
         Use the toolbar on the right to draw on the map
       </p>
-      
+    
       <div style={{
         width: '100%',
         height: '500px',
-        border: '1px solid #ddd',
+        border: '1px solid var(--border-dark)',
         borderRadius: '8px',
         overflow: 'hidden',
         position: 'relative'
       }}>
         <div id="map" style={{ width: '100%', height: '100%' }} />
       </div>
-
+    
       <div style={{
         marginTop: '15px',
         display: 'flex',
         justifyContent: 'space-between',
         padding: '10px',
-        background: '#f5f5f5',
-        borderRadius: '4px'
+        background: 'var(--bg-darker)',
+        borderRadius: '4px',
+        border: '1px solid var(--border-dark)',
+        color: 'var(--text-muted)'
       }}>
-        <div>Features: <strong>{featureCount}</strong></div>
-        <div>Last action: <strong>{lastAction || 'None'}</strong></div>
+        <div>Features: <strong style={{ color: 'var(--text-light)' }}>{featureCount}</strong></div>
+        <div>Last action: <strong style={{ color: 'var(--text-light)' }}>{lastAction || 'None'}</strong></div>
       </div>
-
-      <div style={{ marginTop: '15px', fontSize: '0.9em', color: '#666' }}>
+    
+      <div style={{ marginTop: '15px', fontSize: '0.9em', color: 'var(--text-muted)' }}>
         <p>Tips:</p>
-        <ul>
+        <ul style={{ paddingLeft: '1.2rem' }}>
           <li>Click markers to see coordinates</li>
           <li>Use the edit tool to modify shapes</li>
           <li>Use the delete tool to remove features</li>
         </ul>
       </div>
     </div>
+    
   );
 };
 
