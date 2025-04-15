@@ -33,6 +33,7 @@ A full-stack metro ticket booking web application built with **React.js**, **Nod
 - Can use Maps to plan their journey
 - Can connect Metamask to pay by crypto currency
 - Can use chatbot for help
+- Can download booked tickets
 
 ---
 
