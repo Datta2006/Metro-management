@@ -2,82 +2,77 @@ import React, { useState } from 'react';
 
 const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState(null);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const faqs = [
     {
       question: "How do I book a metro ticket?",
-      answer: "Select your stations, choose travel time, and pay online."
+      answer: "Visit our website or app, select your route, choose travel time, and complete payment."
     },
     {
       question: "What payment methods are accepted?",
-      answer: "We accept credit/debit cards, UPI, and mobile wallets."
+      answer: "We accept credit/debit cards, UPI, net banking, and metro smart cards."
     },
     {
-      question: "Can I cancel my ticket?",
-      answer: "Yes, cancellations are allowed up to 1 hour before departure."
+      question: "Can I get a refund if I cancel?",
+      answer: "Yes, cancellations made at least 1 hour before departure receive full refunds."
     }
   ];
 
   return (
     <div style={{
       maxWidth: '800px',
-      margin: '40px auto',
-      padding: '25px',
-      backgroundColor: '#0A0A12',
-      borderRadius: '12px',
-      boxShadow: '0 8px 16px rgba(0,0,0,0.4)'
+      margin: '2rem auto',
+      padding: '1.5rem',
+      background: '#0a0a12',
+      borderRadius: '10px',
+      boxShadow: '0 4px 20px rgba(0,0,0,0.5)'
     }}>
       <h2 style={{
-        color: '#3D7BFF',
+        color: '#3d7bff',
         textAlign: 'center',
-        marginBottom: '30px',
-        fontSize: '1.8rem',
-        textShadow: '0 2px 4px rgba(61,123,255,0.3)'
+        marginBottom: '1.5rem',
+        fontSize: '1.8rem'
       }}>
-        Frequently Asked Questions
+        Metro Booking FAQs
       </h2>
       
       {faqs.map((faq, index) => (
         <div 
           key={index}
           style={{
-            marginBottom: '15px',
+            marginBottom: '0.75rem',
             borderRadius: '8px',
             overflow: 'hidden',
             transition: 'all 0.3s ease',
-            transform: hoveredIndex === index ? 'translateY(-2px)' : 'none',
-            boxShadow: hoveredIndex === index ? '0 6px 12px rgba(61,123,255,0.2)' : '0 2px 6px rgba(0,0,0,0.2)'
+            background: '#12121d',
+            borderLeft: `3px solid ${activeIndex === index ? '#3d7bff' : 'transparent'}`
           }}
-          onMouseEnter={() => setHoveredIndex(index)}
-          onMouseLeave={() => setHoveredIndex(null)}
         >
           <div 
             onClick={() => setActiveIndex(activeIndex === index ? null : index)}
             style={{
-              padding: '18px',
+              padding: '1rem',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
               cursor: 'pointer',
-              backgroundColor: activeIndex === index ? '#1A1A2A' : '#12121D',
-              transition: 'all 0.3s ease',
-              borderLeft: `4px solid ${hoveredIndex === index ? '#3D7BFF' : 'transparent'}`
+              transition: 'all 0.2s ease',
+              background: activeIndex === index ? '#1a1a2a' : '#12121d',
+              '&:hover': {
+                background: '#1a1a2a'
+              }
             }}
           >
             <h3 style={{
-              color: '#F0F0F0',
+              color: '#f0f0f0',
               margin: 0,
-              fontSize: '1.1rem',
-              transition: 'all 0.2s ease',
-              transform: hoveredIndex === index ? 'translateX(5px)' : 'none'
+              fontSize: '1.1rem'
             }}>
               {faq.question}
             </h3>
             <span style={{
-              color: '#3D7BFF',
+              color: '#3d7bff',
               fontSize: '1.3rem',
-              fontWeight: 'bold',
               transition: 'transform 0.3s ease',
               transform: activeIndex === index ? 'rotate(180deg)' : 'none'
             }}>
@@ -86,18 +81,13 @@ const FAQ = () => {
           </div>
           
           <div style={{
-            maxHeight: activeIndex === index ? '200px' : '0',
+            maxHeight: activeIndex === index ? '500px' : '0',
             overflow: 'hidden',
-            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-            backgroundColor: '#1A1A2A'
+            transition: 'max-height 0.4s ease',
+            color: '#cccccc',
+            background: '#1a1a2a'
           }}>
-            <div style={{
-              padding: activeIndex === index ? '18px' : '0 18px',
-              color: '#CCCCCC',
-              borderTop: '1px solid #252538',
-              opacity: activeIndex === index ? 1 : 0,
-              transition: 'opacity 0.2s ease, padding 0.3s ease'
-            }}>
+            <div style={{ padding: '1rem' }}>
               {faq.answer}
             </div>
           </div>
