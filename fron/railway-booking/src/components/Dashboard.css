@@ -175,3 +175,168 @@ tr:hover td {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1rem;
 }
+.faq-map{
+  display:flex;
+  
+
+}
+/* Dashboard.css */
+.dashboard-root {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.particles-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+}
+
+.dashboard-container {
+  position: relative;
+  z-index: 1;
+  background: rgba(15, 12, 41, 0.85); /* Semi-transparent overlay */
+  min-height: 100vh;
+  padding-bottom: 2rem;
+}
+
+/* Improve text contrast */
+.header, .section-header h2, .search-section h2, 
+.bookings-section h2, .feedback-section h2 {
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+/* Wallet display styling */
+.wallet-display {
+  background: rgba(30, 42, 58, 0.8);
+  padding: 12px;
+  border-radius: 8px;
+  margin: 15px auto;
+  max-width: 90%;
+  border-left: 3px solid #3D7BFF;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wallet-display p {
+  margin: 0;
+  font-size: 0.85em;
+  color: #E0E0E0;
+  font-family: monospace;
+  word-break: break-all;
+}
+
+.wallet-display span {
+  color: #3D7BFF;
+  font-weight: 600;
+}
+
+/* Section styling */
+.trains-section, .bookings-section, .search-section, 
+.feedback-section, .contact-section {
+  background: rgba(42, 42, 60, 0.7);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 95%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+ 
+}
+
+/* Button styling */
+.btn, .btn-refresh, .contact-btn {
+  background: linear-gradient(45deg, #6c63ff, #4a44c6);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(108, 99, 255, 0.4);
+}
+.btn-refresh{
+  flex:1;
+}
+.yourbooking{
+  flex:3;
+  margin-left:30px;
+}
+.btn:hover, .btn-refresh:hover, .contact-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(108, 99, 255, 0.6);
+}
+
+.btn-danger {
+  background: linear-gradient(45deg, #ff6584, #e04a68);
+}
+
+/* Form styling */
+input, textarea, select {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #fff !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #6c63ff !important;
+  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.25) !important;
+}
+
+/* Card styling */
+.booking-card, .train-card {
+  background: rgba(30, 30, 45, 0.8) !important;
+  border: 1px solid rgba(108, 99, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.booking-card:hover, .train-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(108, 99, 255, 0.3);
+}
+
+/* Contact section */
+.direct-contact {
+  background: rgba(30, 42, 58, 0.8);
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 3px solid #FFA726;
+  margin-bottom: 20px;
+}
+
+.direct-contact h3 {
+  color: #FFA726;
+  font-size: 1.1em;
+  margin-bottom: 12px;
+}
+
+.contact-btn {
+  background: #FFA726;
+  color: #0A0A12;
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 0 10px;
+  }
+  
+  .trains-section, .bookings-section, .search-section, 
+  .feedback-section, .contact-section {
+    padding: 15px;
+  }
+  
+  .wallet-display {
+    font-size: 0.8rem;
+  }
+}

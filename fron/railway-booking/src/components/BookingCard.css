@@ -146,7 +146,7 @@
 }
 
 .train-icon {
-  color: #4a90e2;
+  color: #b9cde4;
   font-size: 1.4rem;
   filter: drop-shadow(0 0 5px rgba(74, 144, 226, 0.5));
 }
@@ -187,7 +187,7 @@
 }
 
 .icon {
-  color: #4a90e2;
+  color: #cce1fa;
   font-size: 1rem;
   min-width: 16px;
 }
@@ -204,7 +204,7 @@
   display: flex;
   align-items: center;
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, #4a90e2, #3a7bc8);
+  background: linear-gradient(135deg, #457bb9, #3a7bc8);
   color: white;
   border-radius: 8px;
   font-size: 0.95rem;
@@ -218,7 +218,7 @@
 }
 
 .view-details-btn:hover {
-  background: linear-gradient(135deg, #3a7bc8, #4a90e2);
+  background: linear-gradient(135deg, #4081cf, #4a90e2);
   transform: translateX(8px);
   box-shadow: 0 6px 20px rgba(74, 144, 226, 0.6);
 }

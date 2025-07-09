@@ -4,7 +4,7 @@ import './AdminUsers.css';
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -23,7 +23,7 @@ const AdminUsers = () => {
       setError('Failed to fetch users');
       console.error(err);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -81,18 +81,19 @@ const AdminUsers = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="admin-users"
+      className="admin-users__container"
     >
-      <div className="admin-header">
-        <h2>User Management</h2>
-        <div className="search-box">
+      <div className="admin-users__header">
+        <h2 className="admin-users__title">User Management</h2>
+        <div className="admin-users__search">
           <input
             type="text"
             placeholder="Search users..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            className="admin-users__search-input"
           />
-          <i className="fas fa-search"></i>
+          <i className="admin-users__search-icon fas fa-search"></i>
         </div>
       </div>
       
@@ -100,30 +101,30 @@ const AdminUsers = () => {
         <motion.div 
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="error-message"
+          className="admin-users__error"
         >
           {error}
         </motion.div>
       )}
 
-      <div className="admin-content">
-        {loading ? (
-          <div className="loading-spinner">
-            <div className="spinner"></div>
-            <p>Loading users...</p>
+      <div className="admin-users__content">
+        {isLoading ? (
+          <div className="admin-users__loading">
+            <div className="admin-users__spinner"></div>
+            <p className="admin-users__loading-text">Loading users...</p>
           </div>
         ) : (
-          <div className="user-table-container">
-            <table className="user-table">
-              <thead>
-                <tr>
-                  <th>Username</th>
-                  <th>Email</th>
-                  <th>Role</th>
-                  <th>Actions</th>
+          <div className="admin-users__table-wrapper">
+            <table className="admin-users__table">
+              <thead className="admin-users__table-head">
+                <tr className="admin-users__table-row">
+                  <th className="admin-users__table-header">Username</th>
+                  <th className="admin-users__table-header">Email</th>
+                  <th className="admin-users__table-header">Role</th>
+                  <th className="admin-users__table-header">Actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="admin-users__table-body">
                 {filteredUsers.length > 0 ? (
                   filteredUsers.map(user => (
                     <motion.tr 
@@ -131,23 +132,24 @@ const AdminUsers = () => {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.3 }}
+                      className="admin-users__table-row"
                     >
-                      <td>{user.username}</td>
-                      <td>{user.email}</td>
-                      <td>
+                      <td className="admin-users__table-data">{user.username}</td>
+                      <td className="admin-users__table-data">{user.email}</td>
+                      <td className="admin-users__table-data">
                         <select
                           value={user.role}
                           onChange={(e) => updateUserRole(user.id, e.target.value)}
-                          className="role-select"
+                          className="admin-users__role-select"
                         >
                           <option value="user">User</option>
                           <option value="admin">Admin</option>
                           <option value="moderator">Moderator</option>
                         </select>
                       </td>
-                      <td className="actions">
+                      <td className="admin-users__table-data admin-users__actions">
                         <button 
-                          className="btn btn-delete"
+                          className="admin-users__btn admin-users__btn--delete"
                           onClick={() => deleteUser(user.id)}
                           disabled={user.role === 'admin'}
                         >
@@ -157,14 +159,18 @@ const AdminUsers = () => {
                     </motion.tr>
                   ))
                 ) : (
-                  <tr className="no-results">
-                    <td colSpan="4">No users found</td>
+                  <tr className="admin-users__table-row admin-users__no-results">
+                    <td colSpan="4" className="admin-users__table-data">
+                      No users found
+                    </td>
                   </tr>
                 )}
               </tbody>
             </table>
-            <div className="table-footer">
-              <span>Showing {filteredUsers.length} of {users.length} users</span>
+            <div className="admin-users__footer">
+              <span className="admin-users__count">
+                Showing {filteredUsers.length} of {users.length} users
+              </span>
             </div>
           </div>
         )}

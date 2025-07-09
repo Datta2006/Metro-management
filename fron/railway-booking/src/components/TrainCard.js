@@ -10,6 +10,7 @@ const TrainCard = ({ train, classType, onClick }) => {
   else if (classType === '2A') fare = Math.round(1000 * 2);
   else if (classType === '1A') fare = Math.round(1000* 3);
   else fare=Math.round(1000*2);
+  
 
   return (
     <div className="train-card" onClick={onClick}>
@@ -54,7 +55,7 @@ const TrainCard = ({ train, classType, onClick }) => {
 const TrainCardList = ({ trains, classType, onClick }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 6;
-
+  
   const totalPages = Math.ceil(trains.length / cardsPerPage);
   const currentCards = trains.slice(
     (currentPage - 1) * cardsPerPage,

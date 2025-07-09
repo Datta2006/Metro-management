@@ -115,7 +115,7 @@ const MapComponent = () => {
 
   return (
     <div style={{
-      maxWidth: '800px',
+      maxWidth: '400px',
       margin: '20px auto',
       padding: '20px',
       backgroundColor: 'var(--card-dark)',
@@ -131,7 +131,7 @@ const MapComponent = () => {
     
       <div style={{
         width: '100%',
-        height: '500px',
+        height: '200px',
         border: '1px solid var(--border-dark)',
         borderRadius: '8px',
         overflow: 'hidden',

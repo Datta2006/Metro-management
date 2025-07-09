@@ -2,27 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import ErrorBoundary from './components/ErrorBoundary';
+import Login from './components/Login';
+import Register from './components/Register';
+import Dashboard from './components/Dashboard';
+import AdminPanel from './components/AdminPanel';
+import TrainDetails from './components/TrainDetails';
+import BookingConfirmation from './components/BookingConfirmation';
+import UserProfile from './components/UserProfile';
+// import LoadingSpinner from './components/ui/LoadingSpinner';
 import './App.css';
 
-const pageVariants = {
-  initial: { opacity: 0 },
-  in: { opacity: 1 },
-  out: { opacity: 0 }
-};
-
 const pageTransition = {
-  duration: 0.3
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+  transition: { duration: 0.3 }
 };
-
-
-// Lazy load components
-const Login = React.lazy(() => import('./components/Login'));
-const Register = React.lazy(() => import('./components/Register'));
-const Dashboard = React.lazy(() => import('./components/Dashboard'));
-const AdminPanel = React.lazy(() => import('./components/AdminPanel'));
-const TrainDetails = React.lazy(() => import('./components/TrainDetails'));
-const BookingConfirmation = React.lazy(() => import('./components/BookingConfirmation'));
-const UserProfile = React.lazy(() => import('./components/UserProfile'));
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -35,18 +30,16 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    
-    const checkAuth = async () => {
+    const checkAuth = () => {
       const token = localStorage.getItem('token');
       const userData = localStorage.getItem('user');
       
       if (!token || !userData) {
-        setAuthState({
+        setAuthState(prev => ({
+          ...prev,
           isAuthenticated: false,
-          isLoading: false,
-          user: null,
-          error: null
-        });
+          isLoading: false
+        }));
         return;
       }
 
@@ -57,7 +50,6 @@ function App() {
           isLoading: false,
           user: {
             ...parsedUser,
-            // Normalize is_admin to boolean
             is_admin: Boolean(parsedUser.is_admin)
           },
           error: null
@@ -74,7 +66,6 @@ function App() {
     };
 
     checkAuth();
-    
   }, []);
 
   const setAuthentication = (isAuthenticated, user = null) => {
@@ -83,7 +74,6 @@ function App() {
       isAuthenticated,
       user: user ? {
         ...user,
-        // Normalize is_admin to boolean when setting user
         is_admin: Boolean(user.is_admin)
       } : null,
       error: null
@@ -93,171 +83,113 @@ function App() {
   if (authState.isLoading) {
     return (
       <div className="app-loading">
-        <div className="spinner"></div>
-        <p>Loading application...</p>
+        {/* <LoadingSpinner size="large" /> */}
+        <p>Initializing application...</p>
       </div>
     );
   }
-  
-  // Helper function to check admin status
-  const isAdmin = () => {
-    return authState.isAuthenticated && Boolean(authState.user?.is_admin);
-  };
+
+  const isAdmin = authState.isAuthenticated && Boolean(authState.user?.is_admin);
 
   return (
     <ErrorBoundary>
       <AnimatePresence mode="wait">
-        <React.Suspense fallback={<div className="page-loading">Loading...</div>}>
-          <Routes location={location} key={location.pathname}>
-            <Route path="/login" element={
-              authState.isAuthenticated ? (
-                <Navigate to={isAdmin() ? '/admin' : '/dashboard'} replace />
-              ) : (
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                  <Login setAuthentication={setAuthentication} />
-                </motion.div>
-              )
-            } />
-            <Route
-              path="/register"
-              element={
-                authState.isAuthenticated ? (
-                  <Navigate to={isAdmin() ? '/admin' : '/dashboard'} replace />
-                ) : (
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={pageTransition}
-                  >
-                    <Register setAuthentication={setAuthentication} />
-                  </motion.div>
-                )
-              }
-            />
-            <Route
-              path="/dashboard"
-              element={
-                authState.isAuthenticated && !isAdmin() ? (
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={pageTransition}
-                  >
-                    <Dashboard 
-                      setAuthentication={setAuthentication} 
-                      user={authState.user} 
-                    />
-                  </motion.div>
-                ) : (
-                  <Navigate to={isAdmin() ? '/admin' : '/login'} state={{ from: location }} replace />
-                )
-              }
-            />
-            <Route
-              path="/admin"
-              element={
-                isAdmin() ? (
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={pageTransition}
-                  >
-                    <AdminPanel 
-                      setAuthentication={setAuthentication} 
-                      user={authState.user} 
-                    />
-                  </motion.div>
-                ) : (
-                  <Navigate to="/login" state={{ from: location }} replace />
-                )
-              }
-            />
-            <Route
-              path="/trains/:id"
-              element={
-                authState.isAuthenticated ? (
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={pageTransition}
-                  >
-                    <TrainDetails user={authState.user} />
-                  </motion.div>
-                ) : (
-                  <Navigate to="/login" state={{ from: location }} replace />
-                )
-              }
-            />
-            <Route
-              path="/booking-confirmation/:pnr"
-              element={
-                authState.isAuthenticated ? (
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={pageTransition}
-                  >
-                    <BookingConfirmation user={authState.user} />
-                  </motion.div>
-                ) : (
-                  <Navigate to="/login" state={{ from: location }} replace />
-                )
-              }
-            />
-            <Route
-              path="/profile"
-              element={
-                authState.isAuthenticated ? (
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={pageTransition}
-                  >
-                    <UserProfile 
-                      user={authState.user} 
-                      setUser={(user) => setAuthState(prev => ({
-                        ...prev,
-                        user: {
-                          ...user,
-                          is_admin: Boolean(user.is_admin)
-                        }
-                      }))} 
-                    />
-                  </motion.div>
-                ) : (
-                  <Navigate to="/login" state={{ from: location }} replace />
-                )
-              }
-            />
-            <Route
-              path="/"
-              element={
-                <Navigate
-                  to={
-                    authState.isAuthenticated
-                      ? isAdmin()
-                        ? '/admin'
-                        : '/dashboard'
-                      : '/login'
-                  }
-                  replace
+        <Routes location={location} key={location.pathname}>
+          <Route path="/login" element={
+            authState.isAuthenticated ? (
+              <Navigate to={isAdmin ? '/admin' : '/dashboard'} replace />
+            ) : (
+              <motion.div {...pageTransition}>
+                <Login setAuthentication={setAuthentication} />
+              </motion.div>
+            )
+          } />
+          
+          <Route path="/register" element={
+            authState.isAuthenticated ? (
+              <Navigate to={isAdmin ? '/admin' : '/dashboard'} replace />
+            ) : (
+              <motion.div {...pageTransition}>
+                <Register setAuthentication={setAuthentication} />
+              </motion.div>
+            )
+          } />
+          
+          <Route path="/dashboard" element={
+            authState.isAuthenticated && !isAdmin ? (
+              <motion.div {...pageTransition}>
+                <Dashboard 
+                  setAuthentication={setAuthentication} 
+                  user={authState.user} 
                 />
-              }
-            />
-          </Routes>
-        </React.Suspense>
+              </motion.div>
+            ) : (
+              <Navigate to={isAdmin ? '/admin' : '/login'} state={{ from: location }} replace />
+            )
+          } />
+          
+          <Route path="/admin" element={
+            isAdmin ? (
+              <motion.div {...pageTransition}>
+                <AdminPanel 
+                  setAuthentication={setAuthentication} 
+                  user={authState.user} 
+                />
+              </motion.div>
+            ) : (
+              <Navigate to="/login" state={{ from: location }} replace />
+            )
+          } />
+          
+          <Route path="/trains/:id" element={
+            authState.isAuthenticated ? (
+              <motion.div {...pageTransition}>
+                <TrainDetails user={authState.user} />
+              </motion.div>
+            ) : (
+              <Navigate to="/login" state={{ from: location }} replace />
+            )
+          } />
+          
+          <Route path="/booking-confirmation/:pnr" element={
+            authState.isAuthenticated ? (
+              <motion.div {...pageTransition}>
+                <BookingConfirmation user={authState.user} />
+              </motion.div>
+            ) : (
+              <Navigate to="/login" state={{ from: location }} replace />
+            )
+          } />
+          
+          <Route path="/profile" element={
+            authState.isAuthenticated ? (
+              <motion.div {...pageTransition}>
+                <UserProfile 
+                  user={authState.user} 
+                  setUser={(user) => setAuthState(prev => ({
+                    ...prev,
+                    user: {
+                      ...user,
+                      is_admin: Boolean(user.is_admin)
+                    }
+                  }))} 
+                />
+              </motion.div>
+            ) : (
+              <Navigate to="/login" state={{ from: location }} replace />
+            )
+          } />
+          
+          <Route path="/" element={
+            <Navigate to={
+              authState.isAuthenticated
+                ? isAdmin
+                  ? '/admin'
+                  : '/dashboard'
+                : '/login'
+            } replace />
+          } />
+        </Routes>
       </AnimatePresence>
     </ErrorBoundary>
   );

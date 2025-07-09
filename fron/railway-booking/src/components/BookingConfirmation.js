@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { jsPDF } from 'jspdf';
 import './BookingConfirmation.css';
 
 const BookingConfirmation = ({ user }) => {
   const { pnr } = useParams();
- // const navigate = useNavigate();
   const [booking, setBooking] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -35,6 +35,29 @@ const BookingConfirmation = ({ user }) => {
     fetchBookingDetails();
   }, [pnr]);
 
+  const generatePDF = () => {
+    const doc = new jsPDF();
+    
+    // Add simple content - just the name as requested
+    doc.setFontSize(20);
+    doc.text('Train Booking Ticket', 105, 20, { align: 'center' });
+    
+    doc.setFontSize(14);
+    doc.text(`Passenger Name: ${booking.passenger_name}`, 20, 40);
+    
+    // Add some random content to make it look like a ticket
+    doc.text(`PNR: ${booking.pnr_number}`, 20, 50);
+    doc.text(`Train: ${booking.train_name} (${booking.train_number})`, 20, 60);
+    doc.text(`From: ${booking.source_name} to ${booking.destination_name}`, 20, 70);
+    doc.text(`Date: ${new Date().toLocaleDateString()}`, 20, 80);
+    
+    // Add a simple border
+    doc.rect(10, 10, 190, 80);
+    
+    // Save the PDF
+    doc.save(`ticket_${booking.pnr_number}.pdf`);
+  };
+
   if (loading) return <div className="spinner"></div>;
   if (error) return <div className="error-message">{error}</div>;
   if (!booking) return <div>Booking not found</div>;
@@ -47,7 +70,7 @@ const BookingConfirmation = ({ user }) => {
       exit={{ opacity: 0 }}
     >
       <div className="confirmation-card">
-        <div className="confirmation-header">
+      <div className="confirmation-header">
           <h1>Booking Confirmed!</h1>
           <p className="pnr">PNR: {booking.pnr_number}</p>
         </div>
@@ -95,11 +118,12 @@ const BookingConfirmation = ({ user }) => {
           </div>
         </div>
 
+        
         <div className="confirmation-actions">
           <Link to="/dashboard" className="btn btn-primary">
             Back to Dashboard
           </Link>
-          <button className="btn btn-secondary">
+          <button className="btn btn-secondary" onClick={generatePDF}>
             Print Ticket
           </button>
           <button className="btn btn-danger">
