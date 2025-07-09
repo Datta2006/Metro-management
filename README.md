@@ -1,6 +1,6 @@
 # 🚇 Metro Management System
 
-A full-stack metro ticket booking web application built with **React.js**, **Node.js**, **Express.js**, and **MySQL**. This system allows users to register, login, and book train tickets. Admins have access to manage trains, stations, and users.
+A full-stack metro ticket booking platform with secure authentication, blockchain payments, and admin management features.
 
 ---
 
