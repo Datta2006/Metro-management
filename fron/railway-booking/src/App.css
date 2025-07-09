@@ -238,6 +238,7 @@ body {
   position: relative;
   overflow: hidden;
   background: var(--card-bg);
+  border:1px solid rgba(255, 255, 255, 0.565);
 }
 
 .train-card::before {
@@ -281,12 +282,12 @@ body {
 
 /* Booking */
 .booking-card {
-  border-left: 4px solid var(--primary-color);
+  /* border-left: 4px solid var(--primary-color); */
   background-color: var(--card-bg);
 }
 
 .booking-card.confirmed {
-  border-left-color: var(--success-color);
+  border:1px solid rgb(96, 96, 96);
 }
 
 .booking-card.cancelled {

@@ -37,7 +37,7 @@ const db = mysql.createPool({
   queueLimit: 0
 });
 
-const SECRET_KEY = process.env.JWT_SECRET || 'your-strong-secret-key-here';
+const SECRET_KEY = process.env.JWT_SECRET || 'your-secret';
 const SALT_ROUNDS = 10;
 
 // Verify token middleware

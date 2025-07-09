@@ -40,7 +40,7 @@ const BookingCard = ({ booking, onClick }) => {
       
       <div className="route-section">
         <div className="station">
-          <span className="time">{formatTime(booking.departure_time)}</span>
+          <span className="time">from</span>
           <span className="name">{booking.source_name}</span>
         </div>
         <div className="divider">
@@ -48,7 +48,7 @@ const BookingCard = ({ booking, onClick }) => {
           <FaTrain className="train-icon" />
         </div>
         <div className="station">
-          <span className="time">{formatTime(booking.arrival_time)}</span>
+          <span className="time">to</span>
           <span className="name">{booking.destination_name}</span>
         </div>
       </div>

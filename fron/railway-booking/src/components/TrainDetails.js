@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaTrain, FaUser, FaCalendarAlt, FaClock, FaRupeeSign, FaPlus, FaMinus, FaArrowRight } from 'react-icons/fa';
+import { FaTrain, FaUser, FaClock, FaRupeeSign, FaPlus, FaMinus } from 'react-icons/fa';
 import { IoMdTime } from 'react-icons/io';
 import { GiPathDistance } from 'react-icons/gi';
+import { FaEthereum } from 'react-icons/fa';
+import Web3 from 'web3';
+
+
 import './TrainDetails.css';
 
 const TrainDetails = ({ user }) => {
@@ -15,6 +19,7 @@ const TrainDetails = ({ user }) => {
   const [passengers, setPassengers] = useState([{ name: '', age: '', gender: 'Male' }]);
   const [classType, setClassType] = useState('SL');
   const [selectedStop, setSelectedStop] = useState(null);
+  const web3 = new Web3();
 
   useEffect(() => {
     const fetchTrainDetails = async () => {
@@ -40,7 +45,51 @@ const TrainDetails = ({ user }) => {
 
     fetchTrainDetails();
   }, [id]);
+const handleMetamaskPayment = async () => {
+  if (!window.ethereum) {
+    setError('Install MetaMask to pay with crypto');
+    return;
+  }
 
+  try {
+    const accounts = await window.ethereum.request({ 
+      method: 'eth_requestAccounts' 
+    });
+
+    // Tiny test amount (0.0000000001 ETH)
+    const amountInWei = '0x5AF3107A4000'; 
+
+    // Generate rich description with booking details
+    const description = `Metro Ticket Booking\n
+      Train: ${train.number} - ${train.name}\n
+      Route: ${train.source_name} → ${train.destination_name}\n
+      Class: ${classType}\n
+      Passengers: ${passengers.length}\n
+      Fare: ${calculateFare()} INR`;
+
+    // Convert to hex (MetaMask/Etherscan readable)
+    const hexDescription = web3.utils.utf8ToHex(description);
+
+    // Send transaction with metadata
+    const txHash = await window.ethereum.request({
+      method: 'eth_sendTransaction',
+      params: [{
+        from: accounts[0],
+        to: '0x0000000000000000000000000000000000000000', // Burn address
+        value: amountInWei,
+        data: hexDescription, // Attach booking details
+      }],
+    });
+
+    if (txHash) {
+      await handleBooking(); // Complete booking
+    }
+  } catch (err) {
+    setError(err.message.includes('rejected') 
+      ? 'Transaction rejected' 
+      : 'Payment failed');
+  }
+};
   const handlePassengerChange = (index, field, value) => {
     const updatedPassengers = [...passengers];
     updatedPassengers[index][field] = value;
@@ -235,7 +284,9 @@ const TrainDetails = ({ user }) => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
+            
             <h2>
+              
               <FaUser className="section-icon" />
               Book Tickets
             </h2>
@@ -351,15 +402,22 @@ const TrainDetails = ({ user }) => {
                 <span><FaRupeeSign /> {calculateFare() + 60}</span>
               </div>
             </div>
-
-            <button 
+                <button 
+                className="confirm-booking-btn"
+                onClick={handleMetamaskPayment} // Replace handleBooking
+                disabled={passengers.some(p => !p.name || !p.age)}
+              >
+                Pay and confirm the ticket with MetaMask
+                <FaEthereum className="arrow-icon" /> {/* Add FaEthereum to imports */}
+              </button>
+            {/* <button 
               className="confirm-booking-btn"
               onClick={handleBooking}
               disabled={passengers.some(p => !p.name || !p.age)}
             >
               Confirm Booking
               <FaArrowRight className="arrow-icon" />
-            </button>
+            </button> */}
           </motion.div>
         </div>
       </div>
