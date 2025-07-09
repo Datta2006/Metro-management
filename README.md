@@ -3,60 +3,49 @@
 A full-stack metro ticket booking platform with secure authentication, blockchain payments, and admin management features.
 
 ---
+Features 
+User Features
+ JWT-based authentication (register/login)
 
-## 🌐 Tech Stack
+ Train search by origin/destination
 
-### 🔧 Frontend
-- **React.js** — Modern JavaScript library for building user interfaces
-- **Axios** — For making HTTP requests to the backend
-- **React Router** — For navigation and routing
+ Metamask blockchain payment integration
 
-### 🛠 Backend
-- **Node.js** — JavaScript runtime environment
-- **Express.js** — Fast and minimalist web framework for Node.js
-- **MySQL** — Relational database management system
-- **Sequelize** *(optional)* — ORM for MySQL (if used)
+ PDF ticket generation using jsPDF
 
-### 🔒 Authentication & Security
-- **Bcrypt.js** — For hashing passwords
-- **JWT (JSON Web Tokens)** — For user authentication
-- web3
+ Booking history dashboard
 
+ Admin Features
+ Admin portal with elevated privileges
 
-### others
-- jspdf - to generate pdf
-- leaflet - to generate map
-- metamask - to connect to digital currency
-- react-icons
-- frame-motion
-- swiper
-- react-router-dom
-  
----
+ Train management (add/edit/delete)
 
+ Station management (CRUD operations)
 
-## 👤 User Features
+ User account and Booking management
 
-- User registration and login
-- Book metro/train tickets
-- View train schedules and stations
-- View and manage personal bookings
-- Can write Feedback
-- Can use Maps to plan their journey
-- Can connect Metamask to pay by crypto currency
-- Can use chatbot for help
-- Can download booked tickets
+ Tech Stack 🛠️
+Frontend:
 
----
+React.js 18
 
-## 🛠 Admin Features
+Axios (API calls)
 
-- Add new trains and stations
-- Manage and update train information
-- View all registered users
-- Delete or modify train/station entries
+Web3.js (Metamask integration)
 
----
+jsPDF (ticket generation)
+
+Backend:
+
+Node.js 18
+
+Express.js 4
+
+MySQL 8 (database)
+
+JWT (authentication)
+
+Bcrypt (password hashing)
 
 
 ## 📁 Project Structure
@@ -252,31 +241,6 @@ const connection = mysql.createConnection({
 ```
 
  Replace `your_username_here` and `your_password_here` with your MySQL user credentials.
-
----
-
-## 🛠️ Tech Stack
-
-- **Frontend**: React.js
-- **Backend**: Node.js + Express.js
-- **Database**: MySQL
-- **Query Handling**: Raw SQL
-
----
-
-## 📸 Screenshots / Demo
-
-
-<img src="assets/File 1.png" width="500"/>
-<img src="assets/File 2.png" width="500"/>
-<img src="assets/File 3.png" width="500"/>
-<img src="assets/File 4.png" width="500"/>
-<img src="assets/File 5.png" width="500"/>
-<img src="assets/File 6.png" width="200"/>
-<img src="assets/File 7.png" width="500"/>
-<img src="assets/File 8.png" width="500"/>
-
-
 
 ---
 
