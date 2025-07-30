@@ -3,59 +3,50 @@
 A full-stack metro ticket booking platform with secure authentication, blockchain payments, and admin management features.
 
 ---
-Features 
-User Features
- JWT-based authentication (register/login)
 
- Train search by origin/destination
+## ✨ Features
 
- Metamask blockchain payment integration
+### 👥 User Features
+- 🔐 JWT-based authentication (Register/Login)
+- 🚆 Train search by origin/destination
+- 💸 Metamask blockchain payment integration
+- 🧾 PDF ticket generation using jsPDF
+- 📊 Booking history dashboard
 
- PDF ticket generation using jsPDF
+### 🛠️ Admin Features
+- 🔐 Admin portal with elevated privileges
+- ➕➖ Train management (Add/Edit/Delete)
+- 🏙️ Station management (Full CRUD operations)
+- 👤 User account and booking management
 
- Booking history dashboard
+---
 
- Admin Features
- Admin portal with elevated privileges
+## 🧰 Tech Stack
 
- Train management (add/edit/delete)
+### 🔹 Frontend
+- React.js 18
+- Axios (API calls)
+- Web3.js (Metamask integration)
+- jsPDF (PDF ticket generation)
 
- Station management (CRUD operations)
+### 🔸 Backend
+- Node.js 18
+- Express.js 4
+- MySQL 8 (Database)
+- JWT (Authentication)
+- Bcrypt (Password hashing)
 
- User account and Booking management
-
- Tech Stack 🛠️
-Frontend:
-
-React.js 18
-
-Axios (API calls)
-
-Web3.js (Metamask integration)
-
-jsPDF (ticket generation)
-
-Backend:
-
-Node.js 18
-
-Express.js 4
-
-MySQL 8 (database)
-
-JWT (authentication)
-
-Bcrypt (password hashing)
-
+---
 
 ## 📁 Project Structure
 
 ```
-root/
+Metro-management/
 ├── fron/                 # React frontend (run with `npm start`)
-├── back/server.js            # Node.js + Express backend
-├── db/                  # Optional: store SQL init scripts here
-├── package.json         # Backend dependencies
+├── back/
+│   └── server.js         # Node.js + Express backend
+├── db/                   # Optional: SQL initialization scripts
+├── package.json          # Backend dependencies
 └── README.md
 ```
 
@@ -63,7 +54,8 @@ root/
 
 ## ⚙️ Setup Instructions
 
-### 1. Clone the repository
+### 1. 📥 Clone the Repository
+
 ```bash
 git clone https://github.com/Datta2006/Metro-management.git
 cd Metro-management
@@ -103,21 +95,22 @@ npm start
 
 ## 🛢️ MySQL Database Setup
 
-### ✅ Create the Database
+### ✅ Step 1: Create the Database
+
 ```sql
 CREATE DATABASE railway_db;
 ```
 
 ---
 
-### 🏗️ Create Tables
+### 🏗️ Step 2: Create Tables
 
 ```sql
 USE railway_db;
 
 -- Users table
 CREATE TABLE users (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
@@ -129,7 +122,7 @@ CREATE TABLE users (
 
 -- Stations table
 CREATE TABLE stations (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     code VARCHAR(10) NOT NULL UNIQUE,
     city VARCHAR(100) NOT NULL,
@@ -139,16 +132,16 @@ CREATE TABLE stations (
 
 -- Trains table
 CREATE TABLE trains (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     number VARCHAR(20) NOT NULL UNIQUE,
     source_station_id INT NOT NULL,
     destination_station_id INT NOT NULL,
-    total_seats INT NOT NULL DEFAULT 100,
+    total_seats INT DEFAULT 100,
     available_seats INT DEFAULT 0,
     departure_time TIME NOT NULL,
     arrival_time TIME NOT NULL,
-    journey_duration VARCHAR(255) NOT NULL DEFAULT '00:00',
+    journey_duration VARCHAR(255) DEFAULT '00:00',
     fare_per_km DECIMAL(10,2) DEFAULT 0.00,
     base_fare DECIMAL(10,2) DEFAULT 500.00,
     distance_km INT DEFAULT 500,
@@ -157,9 +150,9 @@ CREATE TABLE trains (
     FOREIGN KEY (destination_station_id) REFERENCES stations(id)
 );
 
--- Train stops table
+-- Train Stops table
 CREATE TABLE train_stops (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     train_id INT NOT NULL,
     station_id INT NOT NULL,
     arrival_time TIME NOT NULL,
@@ -172,7 +165,7 @@ CREATE TABLE train_stops (
 
 -- Bookings table
 CREATE TABLE bookings (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     train_id INT NOT NULL,
     user_id INT NOT NULL,
     pnr_number VARCHAR(15) NOT NULL UNIQUE,
@@ -191,7 +184,7 @@ CREATE TABLE bookings (
 
 -- Payments table
 CREATE TABLE payments (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     booking_id VARCHAR(20),
     amount DECIMAL(10,2) NOT NULL,
     payment_method ENUM('Credit Card', 'Debit Card', 'Net Banking', 'UPI', 'Wallet') NOT NULL,
@@ -203,7 +196,7 @@ CREATE TABLE payments (
 
 -- Cancellations table
 CREATE TABLE cancellations (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     booking_id INT NOT NULL,
     cancellation_reason TEXT,
     refund_amount DECIMAL(10,2) NOT NULL,
@@ -213,7 +206,7 @@ CREATE TABLE cancellations (
 
 -- Feedback table
 CREATE TABLE feedback (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     train_id INT,
     rating INT NOT NULL,
@@ -229,23 +222,22 @@ CREATE TABLE feedback (
 
 ## 🔐 Configure MySQL Credentials
 
-Update your `server.js` file to match your local MySQL credentials:
+Update your `server.js` file in the backend with your MySQL credentials:
 
 ```js
 const connection = mysql.createConnection({
     host: "localhost",
-    user: "root",
+    user: "your_username_here",
     password: "your_password_here",
     database: "railway_db"
 });
 ```
 
- Replace `your_username_here` and `your_password_here` with your MySQL user credentials.
+Replace `your_username_here` and `your_password_here` with your actual MySQL credentials.
 
 ---
 
 ## 👤 Author
 
-Datta ([@Datta2006](https://github.com/Datta2006))
-
----
+**Datta**  
+GitHub: [@Datta2006](https://github.com/Datta2006)
