@@ -1,4 +1,4 @@
-# 🚇 Metro Management System
+# Metro Management System
 
 A full-stack metro ticket booking platform with secure authentication, blockchain payments, and admin management features.
 
@@ -7,32 +7,32 @@ A full-stack metro ticket booking platform with secure authentication, blockchai
 Here is the Demo 
 https://drive.google.com/file/d/1bEn5YFCHjsuIAI5OhVRcUWoPuu12F1uN/view?usp=sharing
 
-## ✨ Features
+## Features
 
-### 👥 User Features
-- 🔐 JWT-based authentication (Register/Login)
-- 🚆 Train search by origin/destination
-- 💸 Metamask blockchain payment integration
-- 🧾 PDF ticket generation using jsPDF
-- 📊 Booking history dashboard
+### User Features
+- JWT-based authentication (Register/Login)
+- Train search by origin/destination
+- Metamask blockchain payment integration
+- PDF ticket generation using jsPDF
+- Booking history dashboard
 
-### 🛠️ Admin Features
-- 🔐 Admin portal with elevated privileges
-- ➕➖ Train management (Add/Edit/Delete)
-- 🏙️ Station management (Full CRUD operations)
-- 👤 User account and booking management
+### Admin Features
+- Admin portal with elevated privileges
+-  Train management (Add/Edit/Delete)
+- Station management (Full CRUD operations)
+- User account and booking management
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
-### 🔹 Frontend
+### Frontend
 - React.js 18
 - Axios (API calls)
 - Web3.js (Metamask integration)
 - jsPDF (PDF ticket generation)
 
-### 🔸 Backend
+### Backend
 - Node.js 18
 - Express.js 4
 - MySQL 8 (Database)
@@ -55,9 +55,9 @@ Metro-management/
 
 ---
 
-## ⚙️ Setup Instructions
+## Setup Instructions
 
-### 1. 📥 Clone the Repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Datta2006/Metro-management.git
@@ -66,7 +66,7 @@ cd Metro-management
 
 ---
 
-### 2. 📦 Install Backend Dependencies
+### 2. Install Backend Dependencies
 
 ```bash
 cd back
@@ -75,7 +75,7 @@ npm install
 
 ---
 
-### 3. 🚀 Start Backend Server
+### 3. Start Backend Server
 
 ```bash
 cd back
@@ -84,7 +84,7 @@ node server.js
 
 ---
 
-### 4. 🌐 Start Frontend (React)
+### 4. Start Frontend (React)
 
 In a **new terminal window**:
 
@@ -96,9 +96,9 @@ npm start
 
 ---
 
-## 🛢️ MySQL Database Setup
+## MySQL Database Setup
 
-### ✅ Step 1: Create the Database
+### Step 1: Create the Database
 
 ```sql
 CREATE DATABASE railway_db;
@@ -106,7 +106,7 @@ CREATE DATABASE railway_db;
 
 ---
 
-### 🏗️ Step 2: Create Tables
+### Step 2: Create Tables
 
 ```sql
 USE railway_db;
@@ -223,7 +223,7 @@ CREATE TABLE feedback (
 
 ---
 
-## 🔐 Configure MySQL Credentials
+## Configure MySQL Credentials
 
 Update your `server.js` file in the backend with your MySQL credentials:
 
@@ -240,7 +240,7 @@ Replace `your_username_here` and `your_password_here` with your actual MySQL cre
 
 ---
 
-## 👤 Author
+## Author
 
 **Datta**  
 GitHub: [@Datta2006](https://github.com/Datta2006)
