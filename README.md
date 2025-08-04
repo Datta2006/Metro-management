@@ -240,7 +240,3 @@ Replace `your_username_here` and `your_password_here` with your actual MySQL cre
 
 ---
 
-## Author
-
-**Datta**  
-GitHub: [@Datta2006](https://github.com/Datta2006)
